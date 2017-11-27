@@ -16,12 +16,12 @@ function generateRandomNumber(min, max) {
 }
 
 var ads = [];
-ads.push({parametres})
+
 
 for (var i = 1; i <= 8; i++) {
   var locationX = generateRandomNumber(300, 900);
 	var locationY = generateRandomNumber(100, 500);
-var parametres = {
+ads.push({
 	"author": {
 		avatar: 'img/avatars/user0' + i + '.png'
 	},
@@ -42,5 +42,5 @@ var parametres = {
 		"x": locationX,
 		"y": locationY
 	}
-	}
+	});
 	}
