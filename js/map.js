@@ -26,7 +26,7 @@ ads.push({
 		avatar: 'img/avatars/user0' + i + '.png'
 	},
 	"offer": {
-		"title": generateRandomNumber(0, 7),
+		"title": titles[generateRandomNumber(0, 7)],
 		"address": locationX + ', ' + locationY,
 		"price": generateRandomNumber(1000, 1000000),
 		"type": types[generateRandomNumber(0, 2)],
@@ -44,3 +44,12 @@ ads.push({
 	}
 	});
 	}
+	console.log(ads);
+	var template = document.querySelector('template').content.querySelector('.map__pin');
+	var mapPin = document.querySelector('.map__pins');
+	
+	for (var j = 1; j<=8; j++){
+	var templateButton = template.cloneNode(true);
+	templateButton.style.left = locationX + 'px';
+	mapPin.appendChild(templateButton);
+}
