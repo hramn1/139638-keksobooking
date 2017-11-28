@@ -53,7 +53,6 @@ ads.push({
 	var template = document.querySelector('template').content.querySelector('.map__pin');
 	var mapPin = document.querySelector('.map__pins');
 	for (var j = 0; j<ads.length; j++){
-		console.log(j);
 	var templateButton = template.cloneNode(true);
 	templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
 	templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
@@ -62,5 +61,10 @@ ads.push({
 	var fragment = document.createDocumentFragment()
 	fragment.appendChild(templateButton);
 	mapPin.appendChild(fragment);
-
+}
+  var templateCard = document.querySelector('template').content.querySelector('.map__card');
+  var popupTemplate = templateCard.cloneNode(true);
+  for (var l = 0; l<ads.length; l++){
+  popupTemplate.querySelector('h3').textContent =  ads[l].offer.title;
+  console.log(popupTemplate.innerHTML)
 }
