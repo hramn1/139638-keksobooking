@@ -52,10 +52,11 @@ ads.push({
 	console.log(ads);
 	var template = document.querySelector('template').content.querySelector('.map__pin');
 	var mapPin = document.querySelector('.map__pins');
-	for (var j = 1; j<=8; j++){
+	for (var j = 0; j<ads.length; j++){
+		console.log(j);
 	var templateButton = template.cloneNode(true);
-	templateButton.style.left = ads[j].location.x - BUTTON_WIDTH / 2 + 'px';
-	templateButton.style.top = ads[j].location.y - BUTTON_HEIGHT / 2 + 'px';
+	templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
+	templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
 	templateButton.className = 'map__pin';
 	templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">'
 	var fragment = document.createDocumentFragment()
