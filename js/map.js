@@ -1,7 +1,7 @@
 'use strict';
 
 var BUTTON_WIDTH = 40;
-var BUTTON_HEIGHT = 40;
+var BUTTON_HEIGHT = 62;
 
 
 var map = document.querySelector('.map');
@@ -57,5 +57,9 @@ ads.push({
 	templateButton.style.left = ads[j].location.x - BUTTON_WIDTH / 2 + 'px';
 	templateButton.style.top = ads[j].location.y - BUTTON_HEIGHT / 2 + 'px';
 	templateButton.className = 'map__pin';
-	mapPin.appendChild(templateButton);
+	templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">'
+	var fragment = document.createDocumentFragment()
+	fragment.appendChild(templateButton);
+	mapPin.appendChild(fragment);
+
 }
