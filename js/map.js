@@ -47,9 +47,10 @@ ads.push({
 	console.log(ads);
 	var template = document.querySelector('template').content.querySelector('.map__pin');
 	var mapPin = document.querySelector('.map__pins');
-	
+	console.log(ads['location.x']);
 	for (var j = 1; j<=8; j++){
 	var templateButton = template.cloneNode(true);
-	templateButton.style.left = locationX + 'px';
+
+	templateButton.style.left = ads[locationX] + 'px';
 	mapPin.appendChild(templateButton);
 }
