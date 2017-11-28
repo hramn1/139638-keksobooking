@@ -1,4 +1,9 @@
 'use strict';
+
+var BUTTON_WIDTH = 40;
+var BUTTON_HEIGHT = 40;
+
+
 var map = document.querySelector('.map');
 map.classList.remove('map--faded');
 
@@ -47,10 +52,10 @@ ads.push({
 	console.log(ads);
 	var template = document.querySelector('template').content.querySelector('.map__pin');
 	var mapPin = document.querySelector('.map__pins');
-	console.log(ads['location.x']);
 	for (var j = 1; j<=8; j++){
 	var templateButton = template.cloneNode(true);
-
-	templateButton.style.left = ads[locationX] + 'px';
+	templateButton.style.left = ads[j].location.x - BUTTON_WIDTH / 2 + 'px';
+	templateButton.style.top = ads[j].location.y - BUTTON_HEIGHT / 2 + 'px';
+	templateButton.className = 'map__pin';
 	mapPin.appendChild(templateButton);
 }
