@@ -66,5 +66,12 @@ ads.push({
   var popupTemplate = templateCard.cloneNode(true);
   for (var l = 0; l<ads.length; l++){
   popupTemplate.querySelector('h3').textContent =  ads[l].offer.title;
-  console.log(popupTemplate.innerHTML)
+  popupTemplate.querySelector('p > small').textContent =  ads[l].offer.address;
+  popupTemplate.querySelector('.popup__price').textContent =  ads[l].offer.price + '&#x20bd;/ночь';
+  popupTemplate.querySelector('h4').textContent =  ads[l].offer.type;
+  popupTemplate.querySelector('h4 + p').textContent =  ads[l].offer.rooms + ' для' + ads[l].offer.guests; + ' гостей';
+  popupTemplate.querySelector('p + p').textContent = 'Заезд после ' + ads[l].offer.checkin + ', выезд до' + ads[l].offer.checkout;
+  //popupTemplate.querySelector('.popup__features').textContent =  ads[l].offer.guests;
+  popupTemplate.querySelector('p').textContent =  ads[l].offer.description;
+  popupTemplate.querySelector('.popup__avatar').setAttribute('src', ads[l].author.avatar);
 }
