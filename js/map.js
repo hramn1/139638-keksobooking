@@ -80,6 +80,10 @@ var showMapCard = function () {
   popupTemplate.querySelector('.popup__features').textContent = ads[0].offer.features;
   popupTemplate.querySelector('p').textContent = ads[0].offer.description;
   popupTemplate.querySelector('.popup__avatar').setAttribute('src', ads[0].author.avatar);
+  //var features = popupTemplate.querySelector('.popup__features').textContent;
+  //for(var l = 0; l < ads[0].offer.features.length; l++) {
+    //var element = features.createElement(li);
+  //}
   var typeLive = popupTemplate.querySelector('h4').textContent;
   if (typeLive === 'house') {
     typeLive = 'Дом';
@@ -100,3 +104,5 @@ var initMap = function () {
   generateButton();
 };
 initMap();
+console.log(features);
+console.log(ads);
