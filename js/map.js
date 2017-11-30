@@ -65,10 +65,11 @@ for (var j = 0; j < ads.length; j++) {
 
 var templateCard = document.querySelector('template').content.querySelector('.map__card');
 var popupTemplate = templateCard.cloneNode(true);
-
+var mapCard = document.querySelector('.map');
 for (var l = 0; l < ads.length; l++) {
+  var popupAdress = popupTemplate.querySelector('p:first-of-type');
   popupTemplate.querySelector('h3').textContent = ads[l].offer.title;
-  popupTemplate.querySelector('p small').textContent = ads[l].offer.address;
+  popupAdress.querySelector('small').textContent = ads[l].offer.address;
   popupTemplate.querySelector('.popup__price').textContent = ads[l].offer.price + '&#x20bd;/ночь';
   popupTemplate.querySelector('h4').textContent = ads[l].offer.type;
   popupTemplate.querySelector('h4 + p').textContent = ads[l].offer.rooms + ' для ' + ads[l].offer.guests + ' гостей';
@@ -77,3 +78,6 @@ for (var l = 0; l < ads.length; l++) {
   popupTemplate.querySelector('p').textContent = ads[l].offer.description;
   popupTemplate.querySelector('.popup__avatar').setAttribute('src', ads[l].author.avatar);
 }
+var fragmentMap = document.createDocumentFragment();
+fragmentMap.appendChild(popupTemplate);
+mapCard.appendChild(fragmentMap);
