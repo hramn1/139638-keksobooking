@@ -68,20 +68,21 @@ var popupTemplate = templateCard.cloneNode(true);
 var mapCard = document.querySelector('.map');
 var showMapCard = function(){
   for (var l = 0; l < ads.length; l++) {
-  	return showMapCard;
+    return l;
   }
+  
 }
 console.log(showMapCard());
     var popupAdress = popupTemplate.querySelector('p:first-of-type');
-    popupTemplate.querySelector('h3').textContent = ads[l].offer.title;
-    popupAdress.querySelector('small').textContent = ads[l].offer.address;
-    popupTemplate.querySelector('.popup__price').textContent = ads[l].offer.price + '&#x20bd;/ночь';
-    popupTemplate.querySelector('h4').textContent = ads[l].offer.type;
-    popupTemplate.querySelector('h4 + p').textContent = ads[l].offer.rooms + ' для ' + ads[l].offer.guests + ' гостей';
-    popupTemplate.querySelector('p + p').textContent = 'Заезд после ' + ads[l].offer.checkin + ', выезд до ' + ads[l].offer.checkout;
-    popupTemplate.querySelector('.popup__features').textContent = ads[l].offer.features;
-    popupTemplate.querySelector('p').textContent = ads[l].offer.description;
-    popupTemplate.querySelector('.popup__avatar').setAttribute('src', ads[l].author.avatar);
+    popupTemplate.querySelector('h3').textContent = ads[showMapCard()].offer.title;
+    popupAdress.querySelector('small').textContent = ads[showMapCard()].offer.address;
+    popupTemplate.querySelector('.popup__price').textContent = ads[showMapCard()].offer.price + '&#x20bd;/ночь';
+    popupTemplate.querySelector('h4').textContent = ads[showMapCard()].offer.type;
+    popupTemplate.querySelector('h4 + p').textContent = ads[showMapCard()].offer.rooms + ' для ' + ads[showMapCard()].offer.guests + ' гостей';
+    popupTemplate.querySelector('p + p').textContent = 'Заезд после ' + ads[showMapCard()].offer.checkin + ', выезд до ' + ads[showMapCard()].offer.checkout;
+    popupTemplate.querySelector('.popup__features').textContent = ads[showMapCard()].offer.features;
+    popupTemplate.querySelector('p').textContent = ads[showMapCard()].offer.description;
+    popupTemplate.querySelector('.popup__avatar').setAttribute('src', ads[showMapCard()].author.avatar);
   var fragmentMap = document.createDocumentFragment();
 	fragmentMap.appendChild(popupTemplate);
 	mapCard.appendChild(fragmentMap);
