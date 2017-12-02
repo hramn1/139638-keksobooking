@@ -66,7 +66,7 @@ var generateButton = function (ads) {
   }
 };
 
-var showMapCard = function (adsArray) {
+var showMapCard = function (ad) {
   var templateCard = document.querySelector('template').content.querySelector('.map__card');
   var popupTemplate = templateCard.cloneNode(true);
   var mapCard = document.querySelector('.map');
@@ -74,20 +74,20 @@ var showMapCard = function (adsArray) {
   while (listFeatures.firstChild) {
     listFeatures.removeChild(listFeatures.firstChild);
   }
-  for (var j = 0; j < adsArray.offer.features.length; j++) {
+  for (var j = 0; j < ad.offer.features.length; j++) {
     var newFeatures = document.createElement('li');
-    newFeatures.className = 'feature feature--' + adsArray.offer.features[j];
+    newFeatures.className = 'feature feature--' + ad.offer.features[j];
     listFeatures.appendChild(newFeatures);
   }
   var paragraphs = popupTemplate.querySelectorAll('p');
-  popupTemplate.querySelector('h3').textContent = adsArray.offer.title;
-  popupTemplate.querySelector('p small').textContent = adsArray.offer.address;
-  popupTemplate.querySelector('.popup__price').textContent = adsArray.offer.price + ' \u20BD' + '/ночь';
-  popupTemplate.querySelector('h4').textContent = adsArray.offer.type;
-  paragraphs[2].textContent = adsArray.offer.rooms + ' для ' + adsArray.offer.guests + ' гостей';
-  paragraphs[3].textContent = 'Заезд после ' + adsArray.offer.checkin + ', выезд до ' + adsArray.offer.checkout;
-  paragraphs[4].textContent = adsArray.offer.description;
-  popupTemplate.querySelector('.popup__avatar').setAttribute('src', adsArray.author.avatar);
+  popupTemplate.querySelector('h3').textContent = ad.offer.title;
+  popupTemplate.querySelector('p small').textContent = ad.offer.address;
+  popupTemplate.querySelector('.popup__price').textContent = ad.offer.price + ' \u20BD' + '/ночь';
+  popupTemplate.querySelector('h4').textContent = ad.offer.type;
+  paragraphs[2].textContent = ad.offer.rooms + ' для ' + ad.offer.guests + ' гостей';
+  paragraphs[3].textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
+  paragraphs[4].textContent = ad.offer.description;
+  popupTemplate.querySelector('.popup__avatar').setAttribute('src', ad.author.avatar);
 
   var typeLive = popupTemplate.querySelector('h4').textContent;
   if (typeLive === 'house') {
