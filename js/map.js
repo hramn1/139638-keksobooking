@@ -109,9 +109,6 @@ var initMap = function () {
   showMapCard(ads[0]);
   generateButton(ads);
 };
-<<<<<<< HEAD
-initMap();
-=======
 
 // module4-task1
 
@@ -144,4 +141,3 @@ var onButtonMouseup = function () {
   popupClose.addEventListener('click', onButtonClick);
 };
 mapActivate.addEventListener('mouseup', onButtonMouseup);
->>>>>>> b4d7db0... правки
