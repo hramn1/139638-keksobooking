@@ -109,4 +109,39 @@ var initMap = function () {
   showMapCard(ads[0]);
   generateButton(ads);
 };
+<<<<<<< HEAD
 initMap();
+=======
+
+// module4-task1
+
+var mapActivate = document.querySelector('.map__pin--main');
+var formCard = document.querySelector('.notice__form');
+var fieldsets = formCard.querySelectorAll('fieldset');
+for (var k = 0; k < fieldsets.length; k++) {
+  fieldsets[k].setAttribute('disabled', 'disabled');
+}
+
+var onButtonMouseup = function () {
+  formCard.classList.remove('notice__form--disabled');
+  initMap();
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].removeAttribute('disabled', 'disabled');
+  }
+  var popupClose = document.querySelector('.popup__close');
+  var onButtonClick = function () {
+    var mapCard = document.querySelector('.popup');
+    mapCard.classList.add('hidden');
+  };
+  var mapPins = document.querySelectorAll('.map__pin');
+  for (var l = 1; l < mapPins.length; l++) {
+    mapPins[l].addEventListener('click', function () {
+      for (var j = 1; j < mapPins.length; j++) {
+        mapPins[j].classList.add('active');
+      }
+    });
+  }
+  popupClose.addEventListener('click', onButtonClick);
+};
+mapActivate.addEventListener('mouseup', onButtonMouseup);
+>>>>>>> b4d7db0... правки
