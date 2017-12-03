@@ -108,5 +108,28 @@ var initMap = function () {
   ads = renderAdsArray();
   showMapCard(ads[0]);
   generateButton(ads);
+
 };
-initMap();
+
+
+var mapActivate = document.querySelector('.map__pin--main');
+var formCard = document.querySelector('.notice__form');
+  var fieldsets = formCard.querySelectorAll('fieldset');
+  for (var k = 0; k< fieldsets.length; k++){
+    fieldsets[k].setAttribute("disabled", "disabled");
+  }
+
+  mapActivate.addEventListener('mouseup',function(){
+  formCard.classList.remove('notice__form--disabled');
+      initMap();
+        for (var k = 0; k< fieldsets.length; k++){
+    fieldsets[k].removeAttribute("disabled", "disabled");
+  }
+  })
+	var mapPins = document.querySelectorAll('.map__pin')
+	for (var l = 0; l < mapPins.length; l++){
+		mapPins[l].addEventListener('click', function(){
+			mapPins[l].classList.toogle('map__pin--active');
+		})
+	}
+
