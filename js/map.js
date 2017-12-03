@@ -111,25 +111,34 @@ var initMap = function () {
 
 };
 
+// module4-task1
 
 var mapActivate = document.querySelector('.map__pin--main');
 var formCard = document.querySelector('.notice__form');
-  var fieldsets = formCard.querySelectorAll('fieldset');
-  for (var k = 0; k< fieldsets.length; k++){
-    fieldsets[k].setAttribute("disabled", "disabled");
-  }
+var fieldsets = formCard.querySelectorAll('fieldset');
+for (var k = 0; k < fieldsets.length; k++) {
+  fieldsets[k].setAttribute('disabled', 'disabled');
+}
 
-  mapActivate.addEventListener('mouseup',function(){
+var onButtonMouseup = function () {
   formCard.classList.remove('notice__form--disabled');
-      initMap();
-        for (var k = 0; k< fieldsets.length; k++){
-    fieldsets[k].removeAttribute("disabled", "disabled");
+  initMap();
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].removeAttribute('disabled', 'disabled');
   }
-  })
-	var mapPins = document.querySelectorAll('.map__pin')
-	for (var l = 0; l < mapPins.length; l++){
-		mapPins[l].addEventListener('click', function(){
-			mapPins[l].classList.toogle('map__pin--active');
-		})
-	}
-
+  var popupClose = document.querySelector('.popup__close');
+  var onButtonClick = function () {
+    var mapCard = document.querySelector('.popup');
+    mapCard.classList.add('hidden');
+  };
+  var mapPins = document.querySelectorAll('.map__pin');
+  for (var l = 1; l < mapPins.length; l++) {
+    mapPins[l].addEventListener('click', function () {
+      for (var j = 1; j < mapPins.length; j++) {
+        mapPins[j].classList.add('active');
+      }
+    });
+  }
+  popupClose.addEventListener('click', onButtonClick);
+};
+mapActivate.addEventListener('mouseup', onButtonMouseup);
