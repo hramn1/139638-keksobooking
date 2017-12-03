@@ -108,16 +108,20 @@ var initMap = function () {
   ads = renderAdsArray();
   showMapCard(ads[0]);
   generateButton(ads);
+ }
+initMap();
+// module4-task1
+var showMap = function (){
+	var mapActivate = document.querySelector('.map__pin--main');
+  var formCard = document.querySelector('.notice__form');
+  var fieldsets = formCard.querySelectorAll('fieldset');
+  for (var k = 0; k < fieldsets.length; k++) {
+  fieldsets[k].setAttribute('disabled', 'disabled');
+  }
+  mapActivate.addEventListener('mouseup', onButtonMouseup);
+  mapActivate.removeEventListener('mouseup', onButtonMouseup);
 };
 
-// module4-task1
-
-var mapActivate = document.querySelector('.map__pin--main');
-var formCard = document.querySelector('.notice__form');
-var fieldsets = formCard.querySelectorAll('fieldset');
-for (var k = 0; k < fieldsets.length; k++) {
-  fieldsets[k].setAttribute('disabled', 'disabled');
-}
 
 var onButtonMouseup = function () {
   formCard.classList.remove('notice__form--disabled');
@@ -142,7 +146,7 @@ var onButtonMouseup = function () {
   }
   popupClose.addEventListener('click', onButtonClick);
 };
-mapActivate.addEventListener('mouseup', onButtonMouseup);
+
 
 // module4-task2
 var adressForm = formCard.querySelectorAll('.form__element--wide');
