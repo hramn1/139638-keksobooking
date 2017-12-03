@@ -126,18 +126,30 @@ var onButtonMouseup = function () {
     fieldsets[i].removeAttribute('disabled', 'disabled');
   }
   var popupClose = document.querySelector('.popup__close');
+
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
   };
+         window.addEventListener("keydown", onButtonClick)
   var mapPins = document.querySelectorAll('.map__pin');
   for (var l = 1; l < mapPins.length; l++) {
     mapPins[l].addEventListener('click', function () {
       for (var j = 1; j < mapPins.length; j++) {
-        mapPins[j].classList.add('active');
+        mapPins[j].classList.add('map__pin--active');
       }
     });
   }
   popupClose.addEventListener('click', onButtonClick);
 };
 mapActivate.addEventListener('mouseup', onButtonMouseup);
+
+// module4-task2
+var adressForm = formCard.querySelectorAll('.form__element--wide');
+var inputAdress = adressForm[1].querySelector('input');
+inputAdress.setAttribute('required', 'required');
+inputAdress.setAttribute('readonly', 'readonly');
+var inputTitle = adressForm[0].querySelector('input');
+inputTitle.setAttribute('required', 'required');
+inputTitle.setAttribute('minlength', '30');
+inputTitle.setAttribute('maxlength', '100');
