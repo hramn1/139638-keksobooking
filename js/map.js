@@ -2,6 +2,8 @@
 
 var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
 
 var mapFadded = function () {
   var map = document.querySelector('.map');
@@ -102,40 +104,20 @@ var showMapCard = function (ad) {
   fragmentMap.appendChild(popupTemplate);
   mapCard.appendChild(fragmentMap);
 };
-var initMap = function () {
-  var ads = [];
-  mapFadded();
-  ads = renderAdsArray();
-  showMapCard(ads[0]);
-  generateButton(ads);
- }
-initMap();
-// module4-task1
-var showMap = function (){
-	var mapActivate = document.querySelector('.map__pin--main');
-  var formCard = document.querySelector('.notice__form');
-  var fieldsets = formCard.querySelectorAll('fieldset');
-  for (var k = 0; k < fieldsets.length; k++) {
-  fieldsets[k].setAttribute('disabled', 'disabled');
-  }
-  mapActivate.addEventListener('mouseup', onButtonMouseup);
-  mapActivate.removeEventListener('mouseup', onButtonMouseup);
-};
-
 
 var onButtonMouseup = function () {
+  var formCard = document.querySelector('.notice__form');
   formCard.classList.remove('notice__form--disabled');
-  initMap();
+  var fieldsets = formCard.querySelectorAll('fieldset');
+  showMap();
   for (var i = 0; i < fieldsets.length; i++) {
     fieldsets[i].removeAttribute('disabled', 'disabled');
   }
   var popupClose = document.querySelector('.popup__close');
-
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
   };
-         window.addEventListener("keydown", onButtonClick)
   var mapPins = document.querySelectorAll('.map__pin');
   for (var l = 1; l < mapPins.length; l++) {
     mapPins[l].addEventListener('click', function () {
@@ -145,10 +127,38 @@ var onButtonMouseup = function () {
     });
   }
   popupClose.addEventListener('click', onButtonClick);
+  document.addEventListener('keydown', onPopupEscPress);
+};
+  var onPopupEscPress = function(event) {
+    if (event.keyCode === ESC_KEYCODE) {
+    var mapCard = document.querySelector('.popup');
+    mapCard.classList.add('hidden');
+    }
+  };
+var initMap = function () {
+  var mapActivate = document.querySelector('.map__pin--main');
+  var formCard = document.querySelector('.notice__form');
+  var fieldsets = formCard.querySelectorAll('fieldset');
+  for (var k = 0; k < fieldsets.length; k++) {
+    fieldsets[k].setAttribute('disabled', 'disabled');
+  }
+  mapActivate.addEventListener('mouseup', onButtonMouseup);
+};
+initMap();
+
+var showMap = function () {
+  var mapActivate = document.querySelector('.map__pin--main');
+  mapActivate.removeEventListener('mouseup', onButtonMouseup);
+  var ads = [];
+  mapFadded();
+  ads = renderAdsArray();
+  //showMapCard(ads[0]);
+  generateButton(ads);
 };
 
 
 // module4-task2
+var formCard = document.querySelector('.notice__form');
 var adressForm = formCard.querySelectorAll('.form__element--wide');
 var inputAdress = adressForm[1].querySelector('input');
 inputAdress.setAttribute('required', 'required');
