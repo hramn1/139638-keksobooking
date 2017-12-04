@@ -61,7 +61,8 @@ var generateButton = function (ads) {
     templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
     templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
     templateButton.className = 'map__pin';
-    templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false" >';
+    templateButton.setAttribute('tabindex',j);
+    templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
     var fragment = document.createDocumentFragment();
     fragment.appendChild(templateButton);
     mapPin.appendChild(fragment);
@@ -118,16 +119,21 @@ var onButtonMouseup = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
   };
-  var mapPins = document.querySelectorAll('.map__pin');
-  for (var l = 1; l < mapPins.length; l++) {
-    mapPins[l].addEventListener('click', function () {
-      for (var j = 1; j < mapPins.length; j++) {
-        mapPins[j].classList.add('map__pin--active');
-      }
-    });
-  }
+  var mapPins = document.querySelector('.map__pins');
+  mapPins.addEventListener('click', showMapCard2);
+
   popupClose.addEventListener('click', onButtonClick);
   document.addEventListener('keydown', onPopupEscPress);
+};
+var showMapCard2 = function (event) {
+  var targetElement = event.target.closest('button');
+
+  var mapPins = document.querySelectorAll('.map__pin');
+  for (var i = 0; i < mapPins.length; i++) {
+    mapPins[i].classList.remove('map__pin--active');
+  }
+
+  targetElement.classList.add('map__pin--active');
 };
   var onPopupEscPress = function(event) {
     if (event.keyCode === ESC_KEYCODE) {
@@ -145,11 +151,11 @@ var initMap = function () {
   mapActivate.addEventListener('mouseup', onButtonMouseup);
 };
 initMap();
-
+var ads = [];
 var showMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
   mapActivate.removeEventListener('mouseup', onButtonMouseup);
-  var ads = [];
+
   mapFadded();
   ads = renderAdsArray();
   //showMapCard(ads[0]);
