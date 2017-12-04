@@ -159,11 +159,65 @@ var showMap = function () {
 
 // module4-task2
 var formCard = document.querySelector('.notice__form');
-var adressForm = formCard.querySelectorAll('.form__element--wide');
-var inputAdress = adressForm[1].querySelector('input');
+var fielsetsForm = formCard.querySelectorAll('.form__element');
+var inputAdress = fielsetsForm[1].querySelector('input');
 inputAdress.setAttribute('required', 'required');
 inputAdress.setAttribute('readonly', 'readonly');
-var inputTitle = adressForm[0].querySelector('input');
+var inputTitle = fielsetsForm[0].querySelector('input');
 inputTitle.setAttribute('required', 'required');
 inputTitle.setAttribute('minlength', '30');
 inputTitle.setAttribute('maxlength', '100');
+  var inputPrice = fielsetsForm[3].querySelector('input');
+  var inputType = fielsetsForm[2].querySelectorAll('option');
+  inputPrice.setAttribute('required', 'required');
+  inputPrice.setAttribute('value', '1000');
+  inputPrice.setAttribute('max', '1000000');
+
+var minPrice = function(){
+
+  if(inputType[1].selected===true){
+      inputPrice.setAttribute('min', '0');
+  } 
+  else if (inputType[0].selected===true){
+    inputPrice.setAttribute('min', '1000');
+  } else if (inputType[2].selected===true){
+    inputPrice.setAttribute('min', '5000');
+  } else{
+   inputPrice.setAttribute('min', '10000');
+  }
+}
+var guestsForRoom = function (){
+  var selectRoom =  fielsetsForm[5].querySelectorAll('option');
+  var selectGuest = fielsetsForm[6].querySelectorAll('option');
+  //console.log(selectGuest[0]);
+  //console.log(selectRoom[0]);
+  for(var i = 0; i < 4; i++){
+  if(selectRoom[0].selected===true){
+            selectGuest[i].removeAttribute('selected', 'selected');
+
+    selectGuest[2].setAttribute('selected', 'selected');
+
+  } 
+  else if (selectRoom[1].selected===true){
+          selectGuest[1].setAttribute('selected', 'selected');
+
+            selectGuest[i].removeAttribute('selected', 'selected');
+
+  } 
+  else if (selectRoom[2].selected===true){
+                selectGuest[i].removeAttribute('selected', 'selected');
+
+      selectGuest[0].setAttribute('selected', 'selected');
+
+  } 
+else {
+        selectGuest[i].removeAttribute('selected', 'selected');
+       selectGuest[3].setAttribute('selected', 'selected');
+
+    }
+  }
+}
+formCard.onchange = function(){
+  minPrice();
+  guestsForRoom();
+};
