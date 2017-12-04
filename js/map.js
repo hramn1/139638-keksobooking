@@ -3,12 +3,15 @@
 var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
 var ESC_KEYCODE = 27;
-var ENTER_KEYCODE = 13;
+// var ENTER_KEYCODE = 13; пока не использую чтобы не было ошибок
 
 var mapFadded = function () {
   var map = document.querySelector('.map');
   map.classList.remove('map--faded');
 };
+
+var formCard = document.querySelector('.notice__form'); // Глобальная переменная
+var fieldsets = formCard.querySelectorAll('fieldset'); // Глобальная переменная
 
 
 var generateRandomNumber = function (min, max) {
@@ -52,6 +55,7 @@ var renderAdsArray = function () {
   }
   return ads;
 };
+
 var generateButton = function (ads) {
   var template = document.querySelector('template').content.querySelector('.map__pin');
   var mapPin = document.querySelector('.map__pins');
@@ -61,7 +65,7 @@ var generateButton = function (ads) {
     templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
     templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
     templateButton.className = 'map__pin';
-    templateButton.setAttribute('tabindex',j);
+    templateButton.setAttribute('tabindex', j); // Добавил индекс
     templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
     var fragment = document.createDocumentFragment();
     fragment.appendChild(templateButton);
@@ -107,44 +111,42 @@ var showMapCard = function (ad) {
 };
 
 var onButtonMouseup = function () {
-  var formCard = document.querySelector('.notice__form');
   formCard.classList.remove('notice__form--disabled');
-  var fieldsets = formCard.querySelectorAll('fieldset');
   showMap();
   for (var i = 0; i < fieldsets.length; i++) {
     fieldsets[i].removeAttribute('disabled', 'disabled');
   }
-  var popupClose = document.querySelector('.popup__close');
-  var onButtonClick = function () {
-    var mapCard = document.querySelector('.popup');
-    mapCard.classList.add('hidden');
-  };
   var mapPins = document.querySelector('.map__pins');
-  mapPins.addEventListener('click', showMapCard2);
-
-  popupClose.addEventListener('click', onButtonClick);
-  document.addEventListener('keydown', onPopupEscPress);
+  mapPins.addEventListener('click', showMapPins);
 };
-var showMapCard2 = function (event) {
+var showMapPins = function (event) {
   var targetElement = event.target.closest('button');
-
   var mapPins = document.querySelectorAll('.map__pin');
   for (var i = 0; i < mapPins.length; i++) {
     mapPins[i].classList.remove('map__pin--active');
   }
-
   targetElement.classList.add('map__pin--active');
-};
-  var onPopupEscPress = function(event) {
-    if (event.keyCode === ESC_KEYCODE) {
+  // for (var j = 0; j < ads.length; j++) { // Здесь не могу сообразить
+  if (targetElement.getAttribute('tabindex') === 1) {
+    showMapCard(ads[1]);
+  }
+  showMapCard(ads[0]);
+  var popupClose = document.querySelector('.popup__close'); // Кнопка срабатывает один раз потом не работает при повторном добавлении попапа
+  var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
+  };
+  var onPopupEscPress = function (evt) { 
+    if (evt.keyCode === ESC_KEYCODE) {
+      var mapCard = document.querySelector('.popup');
+      mapCard.classList.add('hidden');
     }
   };
+  popupClose.addEventListener('click', onButtonClick);
+  document.addEventListener('keydown', onPopupEscPress);
+};
 var initMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
-  var formCard = document.querySelector('.notice__form');
-  var fieldsets = formCard.querySelectorAll('fieldset');
   for (var k = 0; k < fieldsets.length; k++) {
     fieldsets[k].setAttribute('disabled', 'disabled');
   }
@@ -155,32 +157,40 @@ var ads = [];
 var showMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
   mapActivate.removeEventListener('mouseup', onButtonMouseup);
-
   mapFadded();
   ads = renderAdsArray();
-  //showMapCard(ads[0]);
+  // showMapCard(ads[0]); Удалить?
   generateButton(ads);
 };
 
 
 // module4-task2
-var formCard = document.querySelector('.notice__form');
+
 var fielsetsForm = formCard.querySelectorAll('.form__element');
 var inputAdress = fielsetsForm[1].querySelector('input');
-inputAdress.setAttribute('required', 'required');
-inputAdress.setAttribute('readonly', 'readonly');
+var inputPrice = fielsetsForm[3].querySelector('input');
+var inputType = fielsetsForm[2].querySelectorAll('option');
 var inputTitle = fielsetsForm[0].querySelector('input');
-inputTitle.setAttribute('required', 'required');
-inputTitle.setAttribute('minlength', '30');
-inputTitle.setAttribute('maxlength', '100');
-  var inputPrice = fielsetsForm[3].querySelector('input');
-  var inputType = fielsetsForm[2].querySelectorAll('option');
+var formSelectTime = fielsetsForm[4].querySelectorAll('select');
+var formSelectTimeIn = formSelectTime[0];
+var formSelectTimeOut = formSelectTime[1];
+var selectRoom =  fielsetsForm[5].querySelectorAll('option');
+var selectGuest = fielsetsForm[6].querySelectorAll('option');
+var parentGuest = fielsetsForm[6].querySelector('select')
+
+var formDisable = function () {
+  inputAdress.setAttribute('required', 'required');
+  inputAdress.setAttribute('readonly', 'readonly');
+  inputTitle.setAttribute('required', 'required');
+  inputTitle.setAttribute('minlength', '30');
+  inputTitle.setAttribute('maxlength', '100');
   inputPrice.setAttribute('required', 'required');
   inputPrice.setAttribute('value', '1000');
   inputPrice.setAttribute('max', '1000000');
+}
+formDisable();
 
 var minPrice = function(){
-
   if(inputType[1].selected===true){
       inputPrice.setAttribute('min', '0');
   } 
@@ -192,38 +202,48 @@ var minPrice = function(){
    inputPrice.setAttribute('min', '10000');
   }
 }
-var guestsForRoom = function (){
-  var selectRoom =  fielsetsForm[5].querySelectorAll('option');
-  var selectGuest = fielsetsForm[6].querySelectorAll('option');
-  //console.log(selectGuest[0]);
-  //console.log(selectRoom[0]);
-  for(var i = 0; i < 4; i++){
-  if(selectRoom[0].selected===true){
-            selectGuest[i].removeAttribute('selected', 'selected');
 
-    selectGuest[2].setAttribute('selected', 'selected');
+var guestsForRoom = function (){
+	fielsetsForm[6].value = fielsetsForm[5].value;
+	console.log(fielsetsForm[6].value);
+  for(var i = 0; i < 4; i++){
+  if(selectRoom[0].selected === true){
+    selectGuest[i].style.display ='none';
+    selectGuest[2].style.display ='block';
 
   } 
   else if (selectRoom[1].selected===true){
-          selectGuest[1].setAttribute('selected', 'selected');
-
-            selectGuest[i].removeAttribute('selected', 'selected');
+    selectGuest[i].style.display ='none';
+    selectGuest[2].style.display ='block';
+    selectGuest[1].style.display ='block';
 
   } 
   else if (selectRoom[2].selected===true){
-                selectGuest[i].removeAttribute('selected', 'selected');
-
-      selectGuest[0].setAttribute('selected', 'selected');
+    selectGuest[i].style.display ='block';
+    selectGuest[3].style.display ='none';
 
   } 
 else {
-        selectGuest[i].removeAttribute('selected', 'selected');
-       selectGuest[3].setAttribute('selected', 'selected');
-
+    selectGuest[i].style.display ='none';
+     selectGuest[3].style.display ='block';
     }
   }
 }
-formCard.onchange = function(){
-  minPrice();
-  guestsForRoom();
+var sincroniseTimeOutWithTimeIn = function () {
+  formSelectTimeOut.value = formSelectTimeIn.value;
 };
+var sincroniseTimeInWithTimeOut = function () {
+  formSelectTimeIn.value = formSelectTimeOut.value;
+};
+
+var formSubmit = function () {
+  formCard.setAttribute('action', 'https://js.dump.academy/keksobooking')
+}
+
+formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
+formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
+formCard.addEventListener('change', minPrice);
+formCard.addEventListener('change', guestsForRoom);
+formCard.addEventListener('change', formSubmit);
+
+
