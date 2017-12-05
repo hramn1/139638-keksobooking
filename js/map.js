@@ -4,15 +4,13 @@ var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
 var ESC_KEYCODE = 27;
 // var ENTER_KEYCODE = 13; пока не использую чтобы не было ошибок
+var formCard = document.querySelector('.notice__form');
+var fieldsets = formCard.querySelectorAll('fieldset');
 
 var mapFadded = function () {
   var map = document.querySelector('.map');
   map.classList.remove('map--faded');
 };
-
-var formCard = document.querySelector('.notice__form'); // Глобальная переменная
-var fieldsets = formCard.querySelectorAll('fieldset'); // Глобальная переменная
-
 
 var generateRandomNumber = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
@@ -120,18 +118,17 @@ var onButtonMouseup = function () {
   mapPins.addEventListener('click', showMapPins);
 };
 var showMapPins = function (event) {
+  var popupClose = document.querySelector('.popup__close'); // Кнопка срабатывает один раз потом не работает при повторном добавлении попапа
   var targetElement = event.target.closest('button');
   var mapPins = document.querySelectorAll('.map__pin');
   for (var i = 0; i < mapPins.length; i++) {
     mapPins[i].classList.remove('map__pin--active');
   }
   targetElement.classList.add('map__pin--active');
-  // for (var j = 0; j < ads.length; j++) { // Здесь не могу сообразить
   if (targetElement.getAttribute('tabindex') === 1) {
     showMapCard(ads[1]);
   }
   showMapCard(ads[0]);
-  var popupClose = document.querySelector('.popup__close'); // Кнопка срабатывает один раз потом не работает при повторном добавлении попапа
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
@@ -159,7 +156,6 @@ var showMap = function () {
   mapActivate.removeEventListener('mouseup', onButtonMouseup);
   mapFadded();
   ads = renderAdsArray();
-  // showMapCard(ads[0]); Удалить?
   generateButton(ads);
 };
 
@@ -205,7 +201,6 @@ var minPrice = function(){
 
 var guestsForRoom = function (){
 	fielsetsForm[6].value = fielsetsForm[5].value;
-	console.log(fielsetsForm[6].value);
   for(var i = 0; i < 4; i++){
   if(selectRoom[0].selected === true){
     selectGuest[i].style.display ='none';
