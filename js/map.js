@@ -125,9 +125,6 @@ var showMapPins = function (event) {
     mapPins[i].classList.remove('map__pin--active');
   }
   targetElement.classList.add('map__pin--active');
-  if (targetElement.getAttribute('tabindex') === 1) {
-    showMapCard(ads[1]);
-  }
   showMapCard(ads[0]);
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
