@@ -136,11 +136,17 @@ var showMapPins = function (event) {
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
+    for (var i = 0; i < mapPins.length; i++) {
+      mapPins[i].classList.remove('map__pin--active');
+    }
   };
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       var mapCard = document.querySelector('.popup');
       mapCard.classList.add('hidden');
+      for (var i = 0; i < mapPins.length; i++) {
+        mapPins[i].classList.remove('map__pin--active');
+      }
     }
   };
   var popupClose = document.querySelector('.popup__close');
