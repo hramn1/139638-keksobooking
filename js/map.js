@@ -118,9 +118,8 @@ var onButtonMouseup = function () {
   mapPins.addEventListener('click', showMapPins);
 };
 
-
 var showMapPins = function (event) {
-  var targetElement = event.target.closest('button');
+  var targetElement = event.target.closest('button');//Б23?
   var mapPins = document.querySelectorAll('.map__pin');
   var mapCard = document.querySelector('.popup');
   for (var i = 0; i < mapPins.length; i++) {
@@ -133,6 +132,7 @@ var showMapPins = function (event) {
     map.removeChild(mapCard);
   }
   showMapCard(ads[currentTablindex]);
+  
   var onButtonClick = function () {
     var mapCard = document.querySelector('.popup');
     mapCard.classList.add('hidden');
@@ -140,6 +140,7 @@ var showMapPins = function (event) {
       mapPins[i].classList.remove('map__pin--active');
     }
   };
+  
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
       var mapCard = document.querySelector('.popup');
@@ -149,7 +150,9 @@ var showMapPins = function (event) {
       }
     }
   };
+  
   var popupClose = document.querySelector('.popup__close');
+  
   popupClose.addEventListener('click', onButtonClick);
   document.addEventListener('keydown', onPopupEscPress);
 };
