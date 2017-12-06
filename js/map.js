@@ -3,7 +3,7 @@
 var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
 var ESC_KEYCODE = 27;
-var POPUP_CLASS = '.popup'; 
+var POPUP_CLASS = '.popup';
 var formCard = document.querySelector('.notice__form');
 var fieldsets = formCard.querySelectorAll('fieldset');
 var map = document.querySelector('.map');
@@ -121,7 +121,7 @@ var onButtonMouseup = function () {
 var showMapPins = function (event) {
   var targetElement = event.target.closest('button');
   var mapPins = document.querySelectorAll('.map__pin');
-  var mapCard = document.querySelector('POPUP_CLASS');
+  var mapCard = document.querySelector(POPUP_CLASS);
   for (var i = 0; i < mapPins.length; i++) {
     mapPins[i].classList.remove('map__pin--active');
   }
@@ -132,31 +132,29 @@ var showMapPins = function (event) {
     map.removeChild(mapCard);
   }
   showMapCard(ads[currentTablindex]);
-  
+
   var onButtonClick = function () {
-    var mapCard = document.querySelector('POPUP_CLASS');
+    var mapCard = document.querySelector(POPUP_CLASS);
     mapCard.classList.add('hidden');
     for (var i = 0; i < mapPins.length; i++) {
       mapPins[i].classList.remove('map__pin--active');
     }
   };
-  
+
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
-      var mapCard = document.querySelector('POPUP_CLASS');
+      var mapCard = document.querySelector(POPUP_CLASS);
       mapCard.classList.add('hidden');
       for (var i = 0; i < mapPins.length; i++) {
         mapPins[i].classList.remove('map__pin--active');
       }
     }
   };
-  
+
   var popupClose = document.querySelector('.popup__close');
-  
   popupClose.addEventListener('click', onButtonClick);
   document.addEventListener('keydown', onPopupEscPress);
 };
-
 
 var initMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
@@ -165,7 +163,9 @@ var initMap = function () {
   }
   mapActivate.addEventListener('mouseup', onButtonMouseup);
 };
+
 initMap();
+
 var showMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
   mapActivate.removeEventListener('mouseup', onButtonMouseup);
