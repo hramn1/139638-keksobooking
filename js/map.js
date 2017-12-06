@@ -3,10 +3,11 @@
 var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
 var ESC_KEYCODE = 27;
-// var ENTER_KEYCODE = 13; пока не использую чтобы не было ошибок Вообще нахер не нужна так как батон в любом случае реагирует на enter?
+var POPUP_CLASS = '.popup'; 
 var formCard = document.querySelector('.notice__form');
 var fieldsets = formCard.querySelectorAll('fieldset');
 var map = document.querySelector('.map');
+var ads = [];
 
 var mapFadded = function () {
   map.classList.remove('map--faded');
@@ -17,7 +18,6 @@ var generateRandomNumber = function (min, max) {
 };
 
 var renderAdsArray = function () {
-  var ads = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
     'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик',
     'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -54,7 +54,7 @@ var renderAdsArray = function () {
   return ads;
 };
 
-var generateButton = function (ads) {
+var generateButton = function () {
   var template = document.querySelector('template').content.querySelector('.map__pin');
   var mapPin = document.querySelector('.map__pins');
 
@@ -119,9 +119,9 @@ var onButtonMouseup = function () {
 };
 
 var showMapPins = function (event) {
-  var targetElement = event.target.closest('button');//Б23?
+  var targetElement = event.target.closest('button');
   var mapPins = document.querySelectorAll('.map__pin');
-  var mapCard = document.querySelector('.popup');
+  var mapCard = document.querySelector('POPUP_CLASS');
   for (var i = 0; i < mapPins.length; i++) {
     mapPins[i].classList.remove('map__pin--active');
   }
@@ -134,7 +134,7 @@ var showMapPins = function (event) {
   showMapCard(ads[currentTablindex]);
   
   var onButtonClick = function () {
-    var mapCard = document.querySelector('.popup');
+    var mapCard = document.querySelector('POPUP_CLASS');
     mapCard.classList.add('hidden');
     for (var i = 0; i < mapPins.length; i++) {
       mapPins[i].classList.remove('map__pin--active');
@@ -143,7 +143,7 @@ var showMapPins = function (event) {
   
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === ESC_KEYCODE) {
-      var mapCard = document.querySelector('.popup');
+      var mapCard = document.querySelector('POPUP_CLASS');
       mapCard.classList.add('hidden');
       for (var i = 0; i < mapPins.length; i++) {
         mapPins[i].classList.remove('map__pin--active');
@@ -166,7 +166,6 @@ var initMap = function () {
   mapActivate.addEventListener('mouseup', onButtonMouseup);
 };
 initMap();
-var ads = [];
 var showMap = function () {
   var mapActivate = document.querySelector('.map__pin--main');
   mapActivate.removeEventListener('mouseup', onButtonMouseup);
@@ -174,86 +173,3 @@ var showMap = function () {
   ads = renderAdsArray();
   generateButton(ads);
 };
-
-
-// module4-task2
-/*
-var fielsetsForm = formCard.querySelectorAll('.form__element');
-var inputAdress = fielsetsForm[1].querySelector('input');
-var inputPrice = fielsetsForm[3].querySelector('input');
-var inputType = fielsetsForm[2].querySelectorAll('option');
-var inputTitle = fielsetsForm[0].querySelector('input');
-var formSelectTime = fielsetsForm[4].querySelectorAll('select');
-var formSelectTimeIn = formSelectTime[0];
-var formSelectTimeOut = formSelectTime[1];
-var selectRoom =  fielsetsForm[5].querySelectorAll('option');
-var selectGuest = fielsetsForm[6].querySelectorAll('option');
-var parentGuest = fielsetsForm[6].querySelector('select')
-
-var formDisable = function () {
-  inputAdress.setAttribute('required', 'required');
-  inputAdress.setAttribute('readonly', 'readonly');
-  inputTitle.setAttribute('required', 'required');
-  inputTitle.setAttribute('minlength', '30');
-  inputTitle.setAttribute('maxlength', '100');
-  inputPrice.setAttribute('required', 'required');
-  inputPrice.setAttribute('value', '1000');
-  inputPrice.setAttribute('max', '1000000');
-}
-formDisable();
-
-var minPrice = function(){
-  if(inputType[1].selected===true){
-      inputPrice.setAttribute('min', '0');
-  } 
-  else if (inputType[0].selected===true){
-    inputPrice.setAttribute('min', '1000');
-  } else if (inputType[2].selected===true){
-    inputPrice.setAttribute('min', '5000');
-  } else{
-   inputPrice.setAttribute('min', '10000');
-  }
-}
-
-var guestsForRoom = function (){
-	fielsetsForm[6].value = fielsetsForm[5].value;
-  for(var i = 0; i < 4; i++){
-  if(selectRoom[0].selected === true){
-    selectGuest[i].style.display ='none';
-    selectGuest[2].style.display ='block';
-
-  } 
-  else if (selectRoom[1].selected===true){
-    selectGuest[i].style.display ='none';
-    selectGuest[2].style.display ='block';
-    selectGuest[1].style.display ='block';
-
-  } 
-  else if (selectRoom[2].selected===true){
-    selectGuest[i].style.display ='block';
-    selectGuest[3].style.display ='none';
-
-  } 
-else {
-    selectGuest[i].style.display ='none';
-     selectGuest[3].style.display ='block';
-    }
-  }
-}
-var sincroniseTimeOutWithTimeIn = function () {
-  formSelectTimeOut.value = formSelectTimeIn.value;
-};
-var sincroniseTimeInWithTimeOut = function () {
-  formSelectTimeIn.value = formSelectTimeOut.value;
-};
-
-var formSubmit = function () {
-  formCard.setAttribute('action', 'https://js.dump.academy/keksobooking')
-}
-
-formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
-formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
-formCard.addEventListener('change', minPrice);
-formCard.addEventListener('change', guestsForRoom);
-formCard.addEventListener('change', formSubmit);
-*/
