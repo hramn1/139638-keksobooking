@@ -11,7 +11,6 @@ var formSelectTimeIn = formSelectTime[0];
 var formSelectTimeOut = formSelectTime[1];
 var selectRoom = fielsetsForm[5].querySelectorAll('option');
 var selectGuest = fielsetsForm[6].querySelectorAll('option');
-// var parentGuest = fielsetsForm[6].querySelector('select');
 
 var formDisable = function () {
   inputAdress.setAttribute('required', 'required');
@@ -44,19 +43,28 @@ var guestsForRoom = function () {
     if (selectRoom[0].selected === true) {
       selectGuest[i].style.display = 'none';
       selectGuest[2].style.display = 'block';
+      selectGuest[i].removeAttribute('selected', 'selected');
+      selectGuest[2].setAttribute('selected', 'selected');
     } else if (selectRoom[1].selected === true) {
       selectGuest[i].style.display = 'none';
       selectGuest[2].style.display = 'block';
       selectGuest[1].style.display = 'block';
+      selectGuest[i].removeAttribute('selected', 'selected');
+      selectGuest[1].setAttribute('selected', 'selected');
     } else if (selectRoom[2].selected === true) {
       selectGuest[i].style.display = 'block';
       selectGuest[3].style.display = 'none';
+      selectGuest[i].removeAttribute('selected', 'selected');
+      selectGuest[0].setAttribute('selected', 'selected');
     } else {
       selectGuest[i].style.display = 'none';
       selectGuest[3].style.display = 'block';
+      selectGuest[i].removeAttribute('selected', 'selected');
+      selectGuest[3].setAttribute('selected', 'selected');
     }
   }
 };
+guestsForRoom();
 var sincroniseTimeOutWithTimeIn = function () {
   formSelectTimeOut.value = formSelectTimeIn.value;
 };
