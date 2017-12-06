@@ -2,19 +2,22 @@
 
 var BUTTON_WIDTH = 40;
 var BUTTON_HEIGHT = 62;
+var ESC_KEYCODE = 27;
+var POPUP_CLASS = '.popup';
+var formCard = document.querySelector('.notice__form');
+var fieldsets = formCard.querySelectorAll('fieldset');
+var map = document.querySelector('.map');
+var ads = [];
 
 var mapFadded = function () {
-  var map = document.querySelector('.map');
   map.classList.remove('map--faded');
 };
-
 
 var generateRandomNumber = function (min, max) {
   return Math.floor(min + Math.random() * (max + 1 - min));
 };
 
 var renderAdsArray = function () {
-  var ads = [];
   var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
     'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик',
     'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -50,7 +53,8 @@ var renderAdsArray = function () {
   }
   return ads;
 };
-var generateButton = function (ads) {
+
+var generateButton = function () {
   var template = document.querySelector('template').content.querySelector('.map__pin');
   var mapPin = document.querySelector('.map__pins');
 
@@ -59,7 +63,8 @@ var generateButton = function (ads) {
     templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
     templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
     templateButton.className = 'map__pin';
-    templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false" >';
+    templateButton.setAttribute('tabindex', j);
+    templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
     var fragment = document.createDocumentFragment();
     fragment.appendChild(templateButton);
     mapPin.appendChild(fragment);
@@ -102,11 +107,75 @@ var showMapCard = function (ad) {
   fragmentMap.appendChild(popupTemplate);
   mapCard.appendChild(fragmentMap);
 };
+
+var onButtonMouseup = function () {
+  formCard.classList.remove('notice__form--disabled');
+  showMap();
+  for (var i = 0; i < fieldsets.length; i++) {
+    fieldsets[i].removeAttribute('disabled', 'disabled');
+  }
+  var mapPins = document.querySelector('.map__pins');
+  mapPins.addEventListener('click', showMapPins);
+};
+
+var showMapPins = function (event) {
+  var targetElement = event.target.closest('button');
+  if (targetElement && !targetElement.classList.contains('map__pin--main')) {
+    var mapPins = document.querySelectorAll('.map__pin');
+    var mapCard = document.querySelector(POPUP_CLASS);
+
+    for (var i = 0; i < mapPins.length; i++) {
+      mapPins[i].classList.remove('map__pin--active');
+    }
+    targetElement.classList.add('map__pin--active');
+
+    var currentTablindex = targetElement.getAttribute('tabindex');
+    if (mapCard) {
+      map.removeChild(mapCard);
+    }
+    showMapCard(ads[currentTablindex]);
+
+    var popupClose = document.querySelector('.popup__close');
+    popupClose.addEventListener('click', onButtonClick);
+    document.addEventListener('keydown', onPopupEscPress);
+  }
+};
+
+var onButtonClick = function () {
+  var mapCard = document.querySelector(POPUP_CLASS);
+  var mapPins = document.querySelectorAll('.map__pin');
+  mapCard.classList.add('hidden');
+  for (var i = 0; i < mapPins.length; i++) {
+    mapPins[i].classList.remove('map__pin--active');
+  }
+};
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    var mapCard = document.querySelector(POPUP_CLASS);
+    var mapPins = document.querySelectorAll('.map__pin');
+    mapCard.classList.add('hidden');
+    for (var i = 0; i < mapPins.length; i++) {
+      mapPins[i].classList.remove('map__pin--active');
+    }
+  }
+};
+
+
 var initMap = function () {
-  var ads = [];
+  var mapActivate = document.querySelector('.map__pin--main');
+  for (var k = 0; k < fieldsets.length; k++) {
+    fieldsets[k].setAttribute('disabled', 'disabled');
+  }
+  mapActivate.addEventListener('mouseup', onButtonMouseup);
+};
+
+initMap();
+
+var showMap = function () {
+  var mapActivate = document.querySelector('.map__pin--main');
+  mapActivate.removeEventListener('mouseup', onButtonMouseup);
   mapFadded();
   ads = renderAdsArray();
-  showMapCard(ads[0]);
   generateButton(ads);
 };
-initMap();
