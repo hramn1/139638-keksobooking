@@ -120,7 +120,7 @@ var onButtonMouseup = function () {
 
 var showMapPins = function (event) {
   var targetElement = event.target.closest('button');
-  if (targetElement && targetElement.classList.contains('map__pin--main') === false) {
+  if (targetElement && !targetElement.classList.contains('map__pin--main')) {
     var mapPins = document.querySelectorAll('.map__pin');
     var mapCard = document.querySelector(POPUP_CLASS);
 
