@@ -12,7 +12,7 @@ var formSelectTimeOut = formSelectTime[1];
 var selectRoom = fielsetsForm[5].querySelectorAll('option');
 var selectGuest = fielsetsForm[6].querySelectorAll('option');
 
-var formDisable = function () {
+var disableForm = function () {
   inputAdress.setAttribute('required', 'required');
   inputAdress.setAttribute('readonly', 'readonly');
   inputTitle.setAttribute('required', 'required');
@@ -23,7 +23,7 @@ var formDisable = function () {
   inputPrice.setAttribute('max', '1000000');
 };
 
-formDisable();
+disableForm();
 
 var minPrice = function () {
   if (inputType[1].selected) {
@@ -75,23 +75,11 @@ var formSubmit = function () {
   formCard.setAttribute('action', 'https://js.dump.academy/keksobooking');
 };
 
-var onChangeTime = function () {
+var initForm = function () {
   formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
   formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
-};
-onChangeTime();
-
-var onChangeMinPrice = function () {
   formCard.addEventListener('change', minPrice);
-};
-onChangeMinPrice();
-
-var onChangeQuest = function () {
   formCard.addEventListener('change', guestsForRoom);
-};
-onChangeQuest();
-
-var onChangeSubmit = function () {
   formCard.addEventListener('change', formSubmit);
 };
-onChangeSubmit();
+initForm();
