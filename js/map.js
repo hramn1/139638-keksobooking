@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 'use strict';
 
 var BUTTON_WIDTH = 40;
@@ -181,4 +179,3 @@ var showMap = function () {
   ads = renderAdsArray();
   generateButton(ads);
 };
->>>>>>> 3a7469618a8c3680eaf0e262b5dee472468e0b76
