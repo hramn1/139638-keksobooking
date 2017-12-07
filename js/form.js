@@ -26,11 +26,11 @@ var formDisable = function () {
 formDisable();
 
 var minPrice = function () {
-  if (inputType[1].selected === true) {
+  if (inputType[1].selected) {
     inputPrice.setAttribute('min', '0');
-  } else if (inputType[0].selected === true) {
+  } else if (inputType[0].selected) {
     inputPrice.setAttribute('min', '1000');
-  } else if (inputType[2].selected === true) {
+  } else if (inputType[2].selected) {
     inputPrice.setAttribute('min', '5000');
   } else {
     inputPrice.setAttribute('min', '10000');
@@ -40,18 +40,18 @@ var minPrice = function () {
 var guestsForRoom = function () {
   fielsetsForm[6].value = fielsetsForm[5].value;
   for (var i = 0; i < 4; i++) {
-    if (selectRoom[0].selected === true) {
+    if (selectRoom[0].selected) {
       selectGuest[i].style.display = 'none';
       selectGuest[2].style.display = 'block';
       selectGuest[i].removeAttribute('selected', 'selected');
       selectGuest[2].setAttribute('selected', 'selected');
-    } else if (selectRoom[1].selected === true) {
+    } else if (selectRoom[1].selected) {
       selectGuest[i].style.display = 'none';
       selectGuest[2].style.display = 'block';
       selectGuest[1].style.display = 'block';
       selectGuest[i].removeAttribute('selected', 'selected');
       selectGuest[1].setAttribute('selected', 'selected');
-    } else if (selectRoom[2].selected === true) {
+    } else if (selectRoom[2].selected) {
       selectGuest[i].style.display = 'block';
       selectGuest[3].style.display = 'none';
       selectGuest[i].removeAttribute('selected', 'selected');
@@ -75,8 +75,23 @@ var formSubmit = function () {
   formCard.setAttribute('action', 'https://js.dump.academy/keksobooking');
 };
 
-formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
-formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
-formCard.addEventListener('change', minPrice);
-formCard.addEventListener('change', guestsForRoom);
-formCard.addEventListener('change', formSubmit);
+var onChangeTime = function () {
+  formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
+  formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
+};
+onChangeTime();
+
+var onChangeMinPrice = function () {
+  formCard.addEventListener('change', minPrice);
+};
+onChangeMinPrice();
+
+var onChangeQuest = function () {
+  formCard.addEventListener('change', guestsForRoom);
+};
+onChangeQuest();
+
+var onChangeSubmit = function () {
+  formCard.addEventListener('change', formSubmit);
+};
+onChangeSubmit();
