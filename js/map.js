@@ -4,6 +4,7 @@ window.map = (function () {
 
   var map = document.querySelector('.map');
   var ads = [];
+  var mapActivate = document.querySelector('.map__pin--main');
 
   var mapFadded = function () {
     map.classList.remove('map--faded');
@@ -46,11 +47,18 @@ window.map = (function () {
     return ads;
   };
 
+  var dragMainPin = function () {
+    map.setAttribute('dropzone', 'move');
+    mapActivate.setAttribute('draggable', 'true');
+    mapActivate.firstElementChild.removeAttribute('draggable', false);
+    console.log(mapActivate.firstElementChild)
+  }
+
   var showMap = function () {
-    var mapActivate = document.querySelector('.map__pin--main');
     mapActivate.removeEventListener('mouseup', window.pin.onButtonMouseup);
     mapFadded();
     ads = renderAdsArray();
+    dragMainPin();
     window.pin.generateButton(ads);
   };
 
