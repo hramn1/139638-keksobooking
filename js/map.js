@@ -49,18 +49,18 @@ window.map = (function () {
 
   var onMouseDown = function () {
     mapActivate.addEventListener('mousedown', onMouseDown);
-    mapActivate.setAttribute('draggable', 'true');
+    //mapActivate.setAttribute('draggable', 'true');
     //mapActivate.firstElementChild.removeAttribute('draggable', false);
 
-    var onMouseMove = function (moveEvt) {
+ var onMouseMove = function (moveEvt) {
       var cordsY = moveEvt.clientY;
       var cordsX = moveEvt.clientX;
 
-      /*if (screen.width > 1200) {
+      if (screen.width > 1200) {
         cordsX = moveEvt.clientX - (screen.width - 1200) / 2;
       } else {
          cordsX = moveEvt.clientX;
-      }*/
+      }
       mapActivate.style.left = cordsX + 'px';
 
       if (moveEvt.clientY < 100) {
@@ -73,14 +73,16 @@ window.map = (function () {
 
       window.form.inputAdress.value = 'x: ' + cordsX + ' y: ' + cordsY;
     };
-
     var onMouseUp = function () {
       map.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
     };
+
+
     map.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   };
+
 
   var showMap = function () {
     mapActivate.removeEventListener('mouseup', window.pin.onButtonMouseup);
