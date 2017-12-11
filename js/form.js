@@ -12,6 +12,7 @@ window.form = (function () {
   var formSelectTimeOut = formSelectTime[1];
   var selectRoom = fielsetsForm[5].querySelectorAll('option');
   var selectGuest = fielsetsForm[6].querySelectorAll('option');
+  var changeRoom = formCard.querySelector('#room_number')
 
   var disableForm = function () {
     inputAdress.setAttribute('required', 'required');
@@ -80,7 +81,7 @@ window.form = (function () {
     formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
     formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
     formCard.addEventListener('change', minPrice);
-    selectRoom.addEventListener('change', guestsForRoom);
+    changeRoom.addEventListener('change', guestsForRoom);
     formCard.addEventListener('change', formSubmit);
   };
   initForm();
