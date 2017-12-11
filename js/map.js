@@ -50,25 +50,25 @@ window.map = (function () {
   var onMouseDown = function () {
     mapActivate.addEventListener('mousedown', onMouseDown);
     mapActivate.setAttribute('draggable', 'true');
-    mapActivate.firstElementChild.removeAttribute('draggable', false);
+    //mapActivate.firstElementChild.removeAttribute('draggable', false);
 
     var onMouseMove = function (moveEvt) {
-      var cordsY;
-      var cordsX;
-      if (screen.width > 1200) {
-        cordsX = moveEvt.clientX - ((screen.width - 1200) / 2);
+      var cordsY = moveEvt.clientY;
+      var cordsX = moveEvt.clientX;
+
+      /*if (screen.width > 1200) {
+        cordsX = moveEvt.clientX - (screen.width - 1200) / 2;
       } else {
-        cordsX = moveEvt.clientX;
-      }
+         cordsX = moveEvt.clientX;
+      }*/
       mapActivate.style.left = cordsX + 'px';
 
-      cordsY = moveEvt.clientY + 'px';
-      cordsY = moveEvt.clientY;
       if (moveEvt.clientY < 100) {
         cordsY = 100;
       } else if (moveEvt.clientY > 500) {
         cordsY = 500;
       }
+
       mapActivate.style.top = cordsY + 'px';
 
       window.form.inputAdress.value = 'x: ' + cordsX + ' y: ' + cordsY;
