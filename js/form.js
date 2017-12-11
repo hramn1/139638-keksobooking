@@ -12,7 +12,7 @@ window.form = (function () {
   var formSelectTimeOut = formSelectTime[1];
   var selectRoom = fielsetsForm[5].querySelectorAll('option');
   var selectGuest = fielsetsForm[6].querySelectorAll('option');
-  var changeRoom = formCard.querySelector('#room_number')
+  var changeRoom = formCard.querySelector('#room_number');
 
   var disableForm = function () {
     inputAdress.setAttribute('required', 'required');
