@@ -53,15 +53,25 @@ window.map = (function () {
     mapActivate.firstElementChild.removeAttribute('draggable', false);
 
     var onMouseMove = function (moveEvt) {
-      var cordsY = mapActivate;
-      mapActivate.style.left = (moveEvt.clientX - window.pin.BUTTON_HEIGHT / 2) + 'px';
-      cordsY.style.top = moveEvt.clientY + 'px';
-      if (moveEvt.clientY < 100) {
-        cordsY.style.top = 100 + 'px';
-      } else if (moveEvt.clientY > 500) {
-        cordsY.style.top = 500 + 'px';
+      var cordsY;
+      var cordsX;
+      if (screen.width > 1200) {
+        cordsX = moveEvt.clientX - ((screen.width - 1200) / 2);
+      } else {
+        cordsX = moveEvt.clientX;
       }
-      window.form.inputAdress.value = 'x: ' + moveEvt.clientX + ' y: ' + moveEvt.clientY;
+      mapActivate.style.left = cordsX + 'px';
+
+      cordsY = moveEvt.clientY + 'px';
+      cordsY = moveEvt.clientY;
+      if (moveEvt.clientY < 100) {
+        cordsY = 100;
+      } else if (moveEvt.clientY > 500) {
+        cordsY = 500;
+      }
+      mapActivate.style.top = cordsY + 'px';
+
+      window.form.inputAdress.value = 'x: ' + cordsX + ' y: ' + cordsY;
     };
 
     var onMouseUp = function () {
