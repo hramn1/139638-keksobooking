@@ -80,7 +80,7 @@ window.form = (function () {
     formSelectTimeIn.addEventListener('change', sincroniseTimeOutWithTimeIn);
     formSelectTimeOut.addEventListener('change', sincroniseTimeInWithTimeOut);
     formCard.addEventListener('change', minPrice);
-    formCard.addEventListener('change', guestsForRoom);
+    selectRoom.addEventListener('change', guestsForRoom);
     formCard.addEventListener('change', formSubmit);
   };
   initForm();
