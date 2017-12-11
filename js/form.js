@@ -1,6 +1,6 @@
 'use strict';
 
-(function () {
+window.form = (function () {
   var formCard = document.querySelector('.notice__form');
   var fielsetsForm = formCard.querySelectorAll('.form__element');
   var inputAdress = fielsetsForm[1].querySelector('input');
@@ -84,4 +84,7 @@
     formCard.addEventListener('change', formSubmit);
   };
   initForm();
+  return {
+    inputAdress: inputAdress,
+  };
 })();

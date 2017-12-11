@@ -69,5 +69,7 @@ window.pin = (function () {
   return {
     onButtonMouseup: onButtonMouseup,
     generateButton: generateButton,
+    BUTTON_WIDTH: BUTTON_WIDTH,
+    BUTTON_HEIGHT: BUTTON_HEIGHT,
   };
 })();

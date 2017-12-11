@@ -47,18 +47,36 @@ window.map = (function () {
     return ads;
   };
 
-  var dragMainPin = function () {
-    map.setAttribute('dropzone', 'move');
+  var onMouseDown = function () {
+    mapActivate.addEventListener('mousedown', onMouseDown);
     mapActivate.setAttribute('draggable', 'true');
     mapActivate.firstElementChild.removeAttribute('draggable', false);
-    console.log(mapActivate.firstElementChild)
-  }
+
+    var onMouseMove = function (moveEvt) {
+      var cordsY = mapActivate;
+      mapActivate.style.left = (moveEvt.clientX - window.pin.BUTTON_HEIGHT / 2) + 'px';
+      cordsY.style.top = moveEvt.clientY + 'px';
+      if (moveEvt.clientY < 100) {
+        cordsY.style.top = 100 + 'px';
+      } else if (moveEvt.clientY > 500) {
+        cordsY.style.top = 500 + 'px';
+      }
+      window.form.inputAdress.value = 'x: ' + moveEvt.clientX + ' y: ' + moveEvt.clientY;
+    };
+
+    var onMouseUp = function () {
+      map.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
+    map.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  };
 
   var showMap = function () {
     mapActivate.removeEventListener('mouseup', window.pin.onButtonMouseup);
     mapFadded();
     ads = renderAdsArray();
-    dragMainPin();
+    onMouseDown();
     window.pin.generateButton(ads);
   };
 
@@ -66,5 +84,6 @@ window.map = (function () {
     showMap: showMap,
     ads: ads,
     map: map,
+    onMouseDown: onMouseDown,
   };
 })();
