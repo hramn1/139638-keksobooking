@@ -48,7 +48,7 @@ window.pin = (function () {
       if (mapCard) {
         window.map.map.removeChild(mapCard);
       }
-      window.data.showMapCard(window.map.ads[currentTablindex]);
+      window.showCard.showCard(window.map.ads[currentTablindex]);
 
       var popupClose = document.querySelector('.popup__close');
       popupClose.addEventListener('click', window.utils.onButtonClick);
