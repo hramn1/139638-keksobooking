@@ -6,7 +6,7 @@ window.synchronizeFields = (function () {
     var fieldSecValue = fieldSecValues[fieldOneIndex];
 
     synchronize(fieldSec, fieldSecValue);
-};
+  };
   return {
     sync: sync
   };

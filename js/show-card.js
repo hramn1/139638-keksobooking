@@ -2,6 +2,6 @@
 
 window.showCard = (function () {
   return {
-  showCard: window.data.showMapCard,
- }
+    showCard: window.data.showMapCard,
+  };
 })();
