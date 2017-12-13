@@ -1,15 +1,11 @@
 'use strict';
 
 window.synchronizeFields = (function () {
-  var sync = function (firstInput, secInput, firstInputValues, secInputValues, syncFunction) {
-    var firstInputIndex = firstInputValues.indexOf(firstInput.value);
-    var secInputValue = secInputValues[firstInputIndex];
-    console.log(firstInput.value)
-    console.log(firstInputValues)
-    console.log(firstInputIndex)
-    console.log(secInputValue)
+  var sync = function (fieldOne, fieldSec, fieldOneValues, fieldSecValues, synchronize) {
+    var fieldOneIndex = fieldOneValues.indexOf(fieldOne.value);
+    var fieldSecValue = fieldSecValues[fieldOneIndex];
 
-    syncFunction(secInput, secInputValue);
+    synchronize(fieldSec, fieldSecValue);
 };
   return {
     sync: sync
