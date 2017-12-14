@@ -38,17 +38,18 @@ window.pin = (function () {
     if (targetElement && !targetElement.classList.contains('map__pin--main')) {
       var mapPins = document.querySelectorAll('.map__pin');
       var mapCard = document.querySelector('.popup');
-
       for (var i = 0; i < mapPins.length; i++) {
         mapPins[i].classList.remove('map__pin--active');
       }
       targetElement.classList.add('map__pin--active');
-
       var currentTablindex = targetElement.getAttribute('tabindex');
       if (mapCard) {
         window.map.map.removeChild(mapCard);
+        if (mapCard.classList.contains('popup')) {
+          mapCard.classList.remove('hidden');
+        }
       }
-      window.showCard.showCard(window.map.ads[currentTablindex]);
+      window.showCard.showMapCard(window.map.ads[currentTablindex]);
 
       var popupClose = document.querySelector('.popup__close');
       popupClose.addEventListener('click', window.utils.onButtonClick);
