@@ -110,5 +110,6 @@ window.form = (function () {
   initForm();
   return {
     inputAdress: inputAdress,
+    onErrorRequest: onErrorRequest,
   };
 })();

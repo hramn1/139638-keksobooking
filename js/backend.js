@@ -1,7 +1,7 @@
 'use strict';
 
 window.backend = (function () {
-  var SERVER_URL = 'https://1510.dump.academy/keksobooking3';
+  var SERVER_URL = 'https://1510.dump.academy/keksobooking';
   var SERVER_TIMEOUT = 5000;
   var Status = {
     ok: 200,
