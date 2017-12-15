@@ -1,7 +1,7 @@
 'use strict';
 
 window.backend = (function () {
-  var SERVER_URL = 'https://1510.dump.academy/keksobooking';
+  var SERVER_URL = 'https://1510.dump.academy/keksobooking3';
   var SERVER_TIMEOUT = 5000;
   var Status = {
     ok: 200,
@@ -9,6 +9,7 @@ window.backend = (function () {
     user: 401,
     notFound: 404,
     idiot: 418,
+    server: 500,
   }
 
   var load = function (onLoad, onError ) {
@@ -33,7 +34,9 @@ window.backend = (function () {
           error = 'Ничего не найдено';
           break;
         case Status.idiot:
-          error = "Я идиот"
+          error = 'Я идиот'
+        case Status.server:
+          error = 'Сервер опять ошибся'
         default:
           error = 'Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText;
       }
@@ -56,7 +59,7 @@ window.backend = (function () {
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === SUCCESS_REQUEST) {
+      if (xhr.status === Status.ok) {
         onLoad('Данные успешно отправлены');
       } else {
         onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);

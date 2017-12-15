@@ -86,8 +86,7 @@ window.form = (function () {
     node.textContent = successMessage;
     node.classList.add('success-message');
     document.body.insertAdjacentElement('afterbegin', node);
-    form.reset();
-    window.pin.setAddressValue();
+    formCard.reset();
   };
     var onErrorRequest = function (errorMessage) {
     var node = document.createElement('div');
@@ -95,12 +94,10 @@ window.form = (function () {
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
   };
-    
-  
 
   var formSubmit = function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(form), onSuccessRequest, onErrorRequest)
+    window.backend.save(new FormData(formCard), onSuccessRequest, onErrorRequest)
   }
   var initForm = function () {
     formSelectTimeOut.addEventListener('change', formSelectTimeOutSync);
