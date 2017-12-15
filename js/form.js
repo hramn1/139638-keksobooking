@@ -81,7 +81,7 @@ window.form = (function () {
     formCard.setAttribute('action', 'https://js.dump.academy/keksobooking');
   };
 
-    var onSuccessRequest = function (successMessage) {
+  var onSuccessRequest = function (successMessage) {
     var node = document.createElement('div');
     node.textContent = successMessage;
     node.classList.add('success-message');
@@ -91,8 +91,8 @@ window.form = (function () {
 
   var formSubmit = function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(formCard), onSuccessRequest, window.utils.onErrorRequest)
-  }
+    window.backend.save(new FormData(formCard), onSuccessRequest, window.utils.onErrorRequest);
+  };
   var initForm = function () {
     formSelectTimeOut.addEventListener('change', formSelectTimeOutSync);
     formSelectTimeIn.addEventListener('change', formSelectTimeInSync);

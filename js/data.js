@@ -29,8 +29,12 @@ window.data = (function () {
     fragmentMap.appendChild(popupTemplate);
     mapCard.appendChild(fragmentMap);
   };
+
+
   return {
     dataPopup: dataPopup,
     listFeatures: listFeatures,
   };
+
 })();
+

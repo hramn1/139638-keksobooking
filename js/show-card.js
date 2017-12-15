@@ -17,6 +17,7 @@ window.showCard = (function () {
     if (typeof callback === 'function') {
       callback();
     }
+
   };
   return {
     showMapCard: showMapCard,

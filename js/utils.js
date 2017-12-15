@@ -39,5 +39,6 @@ window.utils = (function () {
     generateRandomNumber: generateRandomNumber,
     onPopupEscPress: onPopupEscPress,
     onButtonClick: onButtonClick,
+    onErrorRequest: onErrorRequest,
   };
 })();

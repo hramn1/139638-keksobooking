@@ -48,7 +48,7 @@ window.map = (function () {
     return ads;
   };
 
-  window.backend.load(renderAdsArray, window.utils.onErrorRequest)
+  window.backend.load(renderAdsArray, window.utils.onErrorRequest);
 
 
   var onMouseDown = function (event) {

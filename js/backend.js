@@ -10,12 +10,12 @@ window.backend = (function () {
     notFound: 404,
     idiot: 418,
     server: 500,
-  }
+  };
 
-  var load = function (onLoad, onError ) {
+  var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.timeout = SERVER_TIMEOUT
+    xhr.timeout = SERVER_TIMEOUT;
 
     xhr.addEventListener('load', function () {
       var error;
@@ -23,20 +23,21 @@ window.backend = (function () {
         case Status.ok:
           onLoad(xhr.response);
           break;
-        
-        case Status.request: 
+        case Status.request:
           error = 'Неверный запрос';
           break;
         case Status.user:
           error = 'Пользователь не авторизован';
           break;
-        case Status.notFound:  
+        case Status.notFound:
           error = 'Ничего не найдено';
           break;
         case Status.idiot:
-          error = 'Я идиот'
+          error = 'Я идиот';
+          break;
         case Status.server:
-          error = 'Сервер опять ошибся'
+          error = 'Сервер опять ошибся';
+          break;
         default:
           error = 'Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText;
       }
@@ -73,5 +74,5 @@ window.backend = (function () {
   return {
     save: save,
     load: load,
-  }
+  };
 })();
