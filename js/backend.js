@@ -1,12 +1,70 @@
 'use strict';
 
 window.backend = (function () {
-  var load = function () {
-    var xhr = new XMLHttpRequest();
-  };
+  var SERVER_URL = 'https://1510.dump.academy/keksobooking';
+  var SERVER_TIMEOUT = 5000;
+  var Status = {
+    ok: 200,
+    request: 400,
+    user: 401,
+    notFound: 404,
+    idiot: 418,
+  }
 
-  var save = function () {
-  var xhr = new XMLHttpRequest();
+  var load = function (onLoad, onError ) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.timeout = SERVER_TIMEOUT
+
+    xhr.addEventListener('load', function () {
+      var error;
+      switch (xhr.status) {
+        case Status.ok:
+          onLoad(xhr.response);
+          break;
+        
+        case Status.request: 
+          error = 'Неверный запрос';
+          break;
+        case Status.user:
+          error = 'Пользователь не авторизован';
+          break;
+        case Status.notFound:  
+          error = 'Ничего не найдено';
+          break;
+        case Status.idiot:
+          error = "Я идиот"
+        default:
+          error = 'Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText;
+      }
+    });
+    xhr.addEventListener('error', function () {
+      onError('Произошла ошибка соединения');
+    });
+
+    xhr.addEventListener('timeout', function () {
+      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+    });
+
+    xhr.open('GET', SERVER_URL + '/data');
+    xhr.send();
+
+  };
+  var save = function (data, onLoad, onError) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.responseType = 'json';
+
+    xhr.addEventListener('load', function () {
+      if (xhr.status === SUCCESS_REQUEST) {
+        onLoad('Данные успешно отправлены');
+      } else {
+        onError('Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText);
+      }
+    });
+
+    xhr.open('POST', SERVER_URL);
+    xhr.send(data);
   };
 
   return {
