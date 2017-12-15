@@ -847,3 +847,31 @@ textarea:focus
 {
     background-position: -10px -10px;
 }
+.error-message
+{
+    position: fixed;
+    z-index: 11;
+    background-color: red;
+    top:0;
+    bottom: 0;
+    width: 100px;
+    left: 0;
+    text-align: center;
+    font-size: 22px;
+    color: white;
+    writing-mode: vertical-rl;
+}
+.success-message
+{
+    position: fixed;
+    z-index: 12;
+    text-align: center;
+    height: 100px;
+    background-color: green; 
+    top: 0;
+    right: 0;
+    left: 0;
+    font-size: 22px;
+    color: white;
+    writing-mode: vertical-rl;
+}
