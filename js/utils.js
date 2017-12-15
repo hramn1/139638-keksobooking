@@ -8,6 +8,13 @@ window.utils = (function () {
     return Math.floor(min + Math.random() * (max + 1 - min));
   };
 
+  var onErrorRequest = function (errorMessage) {
+    var message = document.createElement('div');
+    message.classList.add('error-message');
+    message.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', message);
+  };
+
   var onButtonClick = function () {
     var mapCard = document.querySelector(POPUP_CLASS);
     var mapPins = document.querySelectorAll('.map__pin');

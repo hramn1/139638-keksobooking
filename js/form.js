@@ -88,16 +88,10 @@ window.form = (function () {
     document.body.insertAdjacentElement('afterbegin', node);
     formCard.reset();
   };
-    var onErrorRequest = function (errorMessage) {
-    var node = document.createElement('div');
-    node.classList.add('error-message');
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', node);
-  };
 
   var formSubmit = function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(formCard), onSuccessRequest, onErrorRequest)
+    window.backend.save(new FormData(formCard), onSuccessRequest, window.utils.onErrorRequest)
   }
   var initForm = function () {
     formSelectTimeOut.addEventListener('change', formSelectTimeOutSync);
@@ -110,6 +104,5 @@ window.form = (function () {
   initForm();
   return {
     inputAdress: inputAdress,
-    onErrorRequest: onErrorRequest,
   };
 })();
