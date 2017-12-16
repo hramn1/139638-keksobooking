@@ -20,7 +20,10 @@ window.data = (function () {
       var newPhoto = document.createElement('img');
       newPhoto.setAttribute('src', ad.offer.photos[j]);
       photoLink.setAttribute('href', ad.offer.photos[j]);
-      newPhoto.style.width = '50px';
+      newPhoto.style.width = '45px';
+      newPhoto.style.height = '45px';
+      newPhoto.style.border = '1px solid black';
+      newPhoto.style.margin = '2px';
       fragmentLink.appendChild(photoLink);
       fragmentLink.appendChild(photoLink).appendChild(newPhoto);
     }
