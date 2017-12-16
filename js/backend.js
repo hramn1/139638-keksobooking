@@ -41,6 +41,9 @@ window.backend = (function () {
         default:
           error = 'Неизвестный статус: ' + xhr.status + ' ' + xhr.statusText;
       }
+      if (error) {
+        onError(error);
+      }
     });
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
