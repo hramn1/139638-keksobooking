@@ -10,7 +10,7 @@ window.pin = (function () {
     var template = document.querySelector('template').content.querySelector('.map__pin');
     var mapPin = document.querySelector('.map__pins');
 
-    for (var j = 0; j < window.map.ads.length; j++) {
+    for (var j = 0; j < ads.length; j++) {
       var templateButton = template.cloneNode(true);
       templateButton.style.left = (window.map.ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
       templateButton.style.top = (window.map.ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
@@ -32,6 +32,9 @@ window.pin = (function () {
     var mapPins = document.querySelector('.map__pins');
     mapPins.addEventListener('click', showMapPins);
   };
+
+
+  window.backend.load(dataLoadAds, window.utils.onErrorRequest);
 
   var showMapPins = function (event) {
     var targetElement = event.target.closest('button');

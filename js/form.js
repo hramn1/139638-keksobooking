@@ -89,10 +89,6 @@ window.form = (function () {
     formCard.reset();
   };
 
-  // document.getElementById('avatar').onchange = function(){
-  //   document.querySelector('.notice__preview').style.background = 'red'
-  // }
-
   var formSubmit = function (evt) {
     evt.preventDefault();
     window.backend.save(new FormData(formCard), onSuccessRequest, window.utils.onErrorRequest);

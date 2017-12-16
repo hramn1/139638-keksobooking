@@ -50,7 +50,6 @@ window.map = (function () {
 
   var dataLoadAds = function(data){
     ads = data;
-    return ads
   }
 
   window.backend.load(dataLoadAds, window.utils.onErrorRequest);
@@ -102,7 +101,6 @@ window.map = (function () {
   var showMap = function () {
     mapActivate.removeEventListener('mouseup', window.pin.onButtonMouseup);
     mapFadded();
-    ads = data;
     mapActivate.addEventListener('mousedown', onMouseDown);
     window.pin.generateButton(ads);
   };
