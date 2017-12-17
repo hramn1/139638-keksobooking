@@ -77,16 +77,29 @@ window.form = (function () {
     window.synchronizeFields.sync(apartmentType, pricePerNight, OFFER_TYPES, OFFER_PRICES, syncValueWithMin);
   };
 
-  var formSubmit = function () {
+  var formAttribute = function () {
     formCard.setAttribute('action', 'https://js.dump.academy/keksobooking');
   };
 
+  var onSuccessRequest = function (successMessage) {
+    var node = document.createElement('div');
+    node.textContent = successMessage;
+    node.classList.add('success-message');
+    document.body.insertAdjacentElement('afterbegin', node);
+    formCard.reset();
+  };
+
+  var formSubmit = function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(formCard), onSuccessRequest, window.utils.onErrorRequest);
+  };
   var initForm = function () {
     formSelectTimeOut.addEventListener('change', formSelectTimeOutSync);
     formSelectTimeIn.addEventListener('change', formSelectTimeInSync);
     formCard.addEventListener('change', formSelectTypeSync);
     changeRoom.addEventListener('change', guestsForRoom);
-    formCard.addEventListener('change', formSubmit);
+    formCard.addEventListener('change', formAttribute);
+    formCard.addEventListener('submit', formSubmit);
   };
   initForm();
   return {
