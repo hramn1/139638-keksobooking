@@ -5,6 +5,11 @@ window.pin = (function () {
   var BUTTON_HEIGHT = 62;
   var formCard = document.querySelector('.notice__form');
   var fieldsets = formCard.querySelectorAll('fieldset');
+  var filter = document.querySelector('.map__filters');
+  var houseFilter = filter.querySelector('#housing_type');
+  var priceFilter = filter.querySelector('#housing_price');
+  var roomsFilter = filter.querySelector('#housing_room-number');
+  var guestsFilter = filter.querySelector('#housing_guests-number');
   var localAds;
 
   var generateButton = function (ads) {
@@ -24,6 +29,10 @@ window.pin = (function () {
       mapPin.appendChild(fragment);
     }
   };
+
+  var onChangeFilter = function () {
+
+  }
 
   var onButtonMouseup = function () {
     formCard.classList.remove('notice__form--disabled');
