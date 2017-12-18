@@ -12,6 +12,7 @@ window.pin = (function () {
   var guestsFilter = filter.querySelector('#housing-guests');
   var featyresFilter = filter.querySelector('#housing-features');
   var localAds;
+  var filterAds = [];
 
   var generateButton = function (ads) {
     var template = document.querySelector('template').content.querySelector('.map__pin');
@@ -51,23 +52,24 @@ window.pin = (function () {
     deleteAllPins();
     switch (evt.target.value) {
       case 'house':
-        localAds = updateFilterHouse;
-        generateButton(localAds);
+        filterAds = updateFilterHouse;
+
         break;
 
       case 'flat':
-        localAds = updateFilterFlat;
-        generateButton(localAds);
+        filterAds = updateFilterFlat;
+
         break;
 
       case 'bungalo':
-        localAds = updateFilterBungalo;
-        generateButton(localAds);
+        filterAds = updateFilterBungalo;
+
         break;
 
       default:
-        generateButton(localAds);
+        filterAds = localAds;
     }
+    generateButton(filterAds);
   };
   var onChangeFilterPrice = function (evt) {
     var updateFilterCheap = localAds.filter(function (price) {
@@ -158,13 +160,11 @@ window.pin = (function () {
   };
 
   var onChangeFilterFeatures = function () {
-    localAds.forEach(function (localAds) {
-      var b = localAds.offer.features.filter(function (v) {
-        return v === 'elevator';
-      });
-      console.log(b);
-    });
-  };
+
+		  }
+		}
+		
+
 
   houseFilter.addEventListener('change', onChangeFilterType);
   priceFilter.addEventListener('change', onChangeFilterPrice);

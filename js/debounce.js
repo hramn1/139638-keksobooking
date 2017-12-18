@@ -6,14 +6,14 @@
   window.debounce = function (func) {
     var prevTimer;
 
-    return function () {
+     function () {
       if (prevTimer) {
         window.clearTimeout(prevTimer);
       }
 
       prevTimer = window.setTimeout(func, DEBOUNCE_INTERVAL);
 
-      return prevTimer;
+       prevTimer;
     };
   };
 
