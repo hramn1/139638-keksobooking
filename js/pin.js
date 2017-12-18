@@ -8,33 +8,174 @@ window.pin = (function () {
   var filter = document.querySelector('.map__filters');
   var houseFilter = filter.querySelector('#housing-type');
   var priceFilter = filter.querySelector('#housing-price');
-  var roomsFilter = filter.querySelector('#housing-room-number');
-  var guestsFilter = filter.querySelector('#housing-guests-number');
+  var roomsFilter = filter.querySelector('#housing-rooms');
+  var guestsFilter = filter.querySelector('#housing-guests');
   var localAds;
 
   var generateButton = function (ads) {
     var template = document.querySelector('template').content.querySelector('.map__pin');
     var mapPin = document.querySelector('.map__pins');
-
     for (var j = 0; j < 4; j++) {
       localAds = ads;
       var templateButton = template.cloneNode(true);
-      templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
-      templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
+      templateButton.style.left = (localAds[j].location.x - BUTTON_WIDTH / 2) + 'px';
+      templateButton.style.top = (localAds[j].location.y - BUTTON_HEIGHT / 2) + 'px';
       templateButton.className = 'map__pin';
       templateButton.setAttribute('tabindex', j);
-      templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
+      templateButton.innerHTML = '<img src=" ' + localAds[j].author.avatar + ' " width="40" height="40" draggable="false">';
       var fragment = document.createDocumentFragment();
       fragment.appendChild(templateButton);
       mapPin.appendChild(fragment);
     }
   };
 
-  var onChangeFilter = function () {
+  var onChangeFilterType = function (evt) {
+        console.log(localAds);
+    var updateFilterFlat = localAds.filter(function(type){
+      return type.offer.type === 'flat';
+    })
+    var updateFilterBungalo = localAds.filter(function(type){
+      return type.offer.type === 'bungalo';
+    })
+    var updateFilterHouse= localAds.filter(function(type){
+      return type.offer.type === 'house';
+    })
+    var deleteAllPins = (function () {
+      var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
+        for (var i = 0; i < pins.length; i++) {
+      pins[i].remove();
+    }
+  })()
 
+    switch (evt.target.value) {
+      case 'house':
+      localAds = updateFilterHouse
+        generateButton(localAds);
+        break;
+
+      case 'flat':
+        localAds = updateFilterFlat
+        generateButton(localAds);
+        break;
+      case 'bungalo':
+      localAds = updateFilterBungalo
+       generateButton(localAds);
+        break;
+      default:
+       generateButton(localAds);
+    }
   }
-  houseFilter.addEventListener('change', onChangeFilter)
-  
+    var onChangeFilterPrice = function (evt) {
+        console.log(localAds);
+    var updateFilterCheap = localAds.filter(function(price){
+      return price.offer.price <= 10000;
+    })
+    var updateFilterMiddle = localAds.filter(function(price){
+      return price.offer.price > 10000 && price.offer.price < 50000;
+    })
+    var updateFilterReach = localAds.filter(function(price){
+      return price.offer.price >= 50000;
+    })
+    var deleteAllPins = (function () {
+      var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
+        for (var i = 0; i < pins.length; i++) {
+      pins[i].remove();
+    }
+  })()
+
+    switch (evt.target.value) {
+      case 'low':
+      localAds = updateFilterCheap
+        generateButton(localAds);
+        break;
+
+      case 'middle':
+        localAds = updateFilterMiddle
+        generateButton(localAds);
+        break;
+      case 'hight':
+      localAds = updateFilterReach
+       generateButton(localAds);
+        break;
+      default:
+       generateButton(localAds);
+    }
+  }
+
+  var onChangeFilterRoom = function (evt) {
+        console.log(localAds);
+    var updateFilterOneRoom = localAds.filter(function(rooms){
+      return rooms.offer.rooms === 1;
+    })
+    var updateFilterTwoRoom = localAds.filter(function(rooms){
+      return rooms.offer.rooms === 2;
+    })
+    var updateFilterThreeRoom = localAds.filter(function(rooms){
+      return rooms.offer.rooms === 3;
+    })
+    console.log(updateFilterThreeRoom)
+    var deleteAllPins = (function () {
+      var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
+        for (var i = 0; i < pins.length; i++) {
+      pins[i].remove();
+    }
+  })()
+
+    switch (evt.target.value) {
+      case '1':
+      localAds = updateFilterOneRoom
+        generateButton(localAds);
+        break;
+
+      case '2':
+        localAds = updateFilterTwoRoom
+        generateButton(localAds);
+        break;
+      case '3':
+      localAds = updateFilterThreeRoom
+       generateButton(localAds);
+        break;
+      default:
+       generateButton(localAds);
+    }
+  }
+
+  var onChangeFilterGuest = function (evt) {
+        console.log(localAds);
+    var updateFilterOneGuest= localAds.filter(function(guests){
+      return guests.offer.guests === 1;
+    })
+    var updateFilterTwoGuest = localAds.filter(function(guests){
+      return guests.offer.guests === 2;
+    })
+    var deleteAllPins = (function () {
+      var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
+        for (var i = 0; i < pins.length; i++) {
+      pins[i].remove();
+    }
+  })()
+
+    switch (evt.target.value) {
+      case '1':
+      localAds = updateFilterOneGuest
+        generateButton(localAds);
+        break;
+
+      case '2':
+        localAds = updateFilterTwoGuest
+        generateButton(localAds);
+        break;
+      default:
+       generateButton(localAds);
+    }
+  }
+
+
+
+  houseFilter.addEventListener('change', onChangeFilterType)
+  priceFilter.addEventListener('change', onChangeFilterPrice)
+  roomsFilter.addEventListener('change', onChangeFilterRoom)
+  guestsFilter.addEventListener('change', onChangeFilterGuest)
 
   var onButtonMouseup = function () {
     formCard.classList.remove('notice__form--disabled');
