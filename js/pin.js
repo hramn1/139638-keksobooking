@@ -6,10 +6,10 @@ window.pin = (function () {
   var formCard = document.querySelector('.notice__form');
   var fieldsets = formCard.querySelectorAll('fieldset');
   var filter = document.querySelector('.map__filters');
-  var houseFilter = filter.querySelector('#housing_type');
-  var priceFilter = filter.querySelector('#housing_price');
-  var roomsFilter = filter.querySelector('#housing_room-number');
-  var guestsFilter = filter.querySelector('#housing_guests-number');
+  var houseFilter = filter.querySelector('#housing-type');
+  var priceFilter = filter.querySelector('#housing-price');
+  var roomsFilter = filter.querySelector('#housing-room-number');
+  var guestsFilter = filter.querySelector('#housing-guests-number');
   var localAds;
 
   var generateButton = function (ads) {
@@ -33,6 +33,8 @@ window.pin = (function () {
   var onChangeFilter = function () {
 
   }
+  houseFilter.addEventListener('change', onChangeFilter)
+  
 
   var onButtonMouseup = function () {
     formCard.classList.remove('notice__form--disabled');
