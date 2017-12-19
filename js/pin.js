@@ -167,16 +167,16 @@ window.pin = (function () {
       return filterAds;
     };
 
-    houseFilter.addEventListener('change', onChangeFilterType());
-    priceFilter.addEventListener('change', onChangeFilterPrice());
-    roomsFilter.addEventListener('change', onChangeFilterRoom());
-    guestsFilter.addEventListener('change', onChangeFilterGuest());
-    featyresFilter.addEventListener('change', onChangeFilterFeatures());
-    // onChangeFilterFeatures()
-    // onChangeFilterType()
-    // onChangeFilterPrice()
-    // onChangeFilterGuest()
-    // onChangeFilterRoom()
+    // houseFilter.addEventListener('change', onChangeFilterType());
+    // priceFilter.addEventListener('change', onChangeFilterPrice());
+    // roomsFilter.addEventListener('change', onChangeFilterRoom());
+    // guestsFilter.addEventListener('change', onChangeFilterGuest());
+    // featyresFilter.addEventListener('change', onChangeFilterFeatures());
+    onChangeFilterFeatures()
+    onChangeFilterType()
+    onChangeFilterPrice()
+    onChangeFilterGuest()
+    onChangeFilterRoom()
 
     generateButton(filterAds);
   };
@@ -223,7 +223,7 @@ window.pin = (function () {
     for (var k = 0; k < fieldsets.length; k++) {
       fieldsets[k].setAttribute('disabled', 'disabled');
     }
-    mapActivate.addEventListener('mousedown', onButtonMouseup);
+    mapActivate.addEventListener('mouseup', onButtonMouseup);
   };
 
   initMap();
