@@ -30,7 +30,6 @@ window.pin = (function () {
       mapPin.appendChild(fragment);
     }
   };
-        
 
   var deleteAllPins = (function () {
     var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -71,7 +70,7 @@ window.pin = (function () {
       default:
         filterAds = localAds;
     }
-    generateButton(filterAds)
+    generateButton(filterAds);
   };
   var onChangeFilterPrice = function (evt) {
     var updateFilterCheap = localAds.filter(function (price) {
@@ -163,9 +162,9 @@ window.pin = (function () {
 
   var onChangeFilterFeatures = function () {
     var wifiCheck = function () {
-      featyresFilter.querySelector('#filter-wifi').checked
+      featyresFilter.querySelector('#filter-wifi').checked;
       return true;
-    }
+    };
   };
 
   houseFilter.addEventListener('change', onChangeFilterType);
