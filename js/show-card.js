@@ -2,7 +2,7 @@
 
 window.showCard = (function () {
   var listFeatures = window.data.listFeatures;
-  var showMapCard = function (ad, callback) {
+  var showMapCard = function (ad) {
     while (listFeatures.firstChild) {
       listFeatures.removeChild(listFeatures.firstChild);
     }
@@ -13,10 +13,6 @@ window.showCard = (function () {
     }
 
     window.data.dataPopup(ad);
-
-    if (typeof callback === 'function') {
-      callback();
-    }
 
   };
   return {
