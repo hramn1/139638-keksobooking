@@ -73,5 +73,6 @@ window.map = (function () {
     ads: ads,
     map: map,
     onMouseDown: onMouseDown,
+    dataLoadAds: dataLoadAds,
   };
 })();
