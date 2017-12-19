@@ -38,7 +38,7 @@ window.pin = (function () {
     }
   });
 
-  var onChangeFilterType = function (evt) {
+  var onChangeFilterType = function (evt, filterAds) {
     var updateFilterFlat = localAds.filter(function (type) {
       return type.offer.type === 'flat';
     });
@@ -69,7 +69,7 @@ window.pin = (function () {
       default:
         filterAds = localAds;
     }
-    generateButton(filterAds);
+    generateButton(localAds)
   };
   var onChangeFilterPrice = function (evt) {
     var updateFilterCheap = localAds.filter(function (price) {
@@ -85,17 +85,17 @@ window.pin = (function () {
 
     switch (evt.target.value) {
       case 'low':
-        localAds = updateFilterCheap;
+        filterAds = updateFilterCheap;
         generateButton(localAds);
         break;
 
       case 'middle':
-        localAds = updateFilterMiddle;
+        filterAds = updateFilterMiddle;
         generateButton(localAds);
         break;
 
       case 'hight':
-        localAds = updateFilterReach;
+        filterAds = updateFilterReach;
         generateButton(localAds);
         break;
 
@@ -118,16 +118,16 @@ window.pin = (function () {
 
     switch (evt.target.value) {
       case '1':
-        localAds = updateFilterOneRoom;
+        filterAds = updateFilterOneRoom;
         generateButton(localAds);
         break;
 
       case '2':
-        localAds = updateFilterTwoRoom;
+        filterAds = updateFilterTwoRoom;
         generateButton(localAds);
         break;
       case '3':
-        localAds = updateFilterThreeRoom;
+        filterAds = updateFilterThreeRoom;
         generateButton(localAds);
         break;
       default:
@@ -146,12 +146,12 @@ window.pin = (function () {
 
     switch (evt.target.value) {
       case '1':
-        localAds = updateFilterOneGuest;
+        filterAds = updateFilterOneGuest;
         generateButton(localAds);
         break;
 
       case '2':
-        localAds = updateFilterTwoGuest;
+        filterAds = updateFilterTwoGuest;
         generateButton(localAds);
         break;
       default:
@@ -160,11 +160,7 @@ window.pin = (function () {
   };
 
   var onChangeFilterFeatures = function () {
-
-		  }
-		}
-		
-
+  };
 
   houseFilter.addEventListener('change', onChangeFilterType);
   priceFilter.addEventListener('change', onChangeFilterPrice);
