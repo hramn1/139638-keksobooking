@@ -223,7 +223,7 @@ window.pin = (function () {
     for (var k = 0; k < fieldsets.length; k++) {
       fieldsets[k].setAttribute('disabled', 'disabled');
     }
-    mapActivate.addEventListener('mouseup', onButtonMouseup);
+    mapActivate.addEventListener('mousedown', onButtonMouseup);
   };
 
   initMap();
