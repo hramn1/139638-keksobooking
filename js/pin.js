@@ -30,6 +30,7 @@ window.pin = (function () {
       mapPin.appendChild(fragment);
     }
   };
+        
 
   var deleteAllPins = (function () {
     var pins = window.map.map.querySelectorAll('.map__pin:not(.map__pin--main)');
@@ -38,7 +39,8 @@ window.pin = (function () {
     }
   });
 
-  var onChangeFilterType = function (evt, filterAds) {
+
+  var onChangeFilterType = function (evt) {
     var updateFilterFlat = localAds.filter(function (type) {
       return type.offer.type === 'flat';
     });
@@ -69,7 +71,7 @@ window.pin = (function () {
       default:
         filterAds = localAds;
     }
-    generateButton(localAds)
+    generateButton(filterAds)
   };
   var onChangeFilterPrice = function (evt) {
     var updateFilterCheap = localAds.filter(function (price) {
@@ -160,6 +162,10 @@ window.pin = (function () {
   };
 
   var onChangeFilterFeatures = function () {
+    var wifiCheck = function () {
+      featyresFilter.querySelector('#filter-wifi').checked
+      return true;
+    }
   };
 
   houseFilter.addEventListener('change', onChangeFilterType);
