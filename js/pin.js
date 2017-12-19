@@ -11,8 +11,7 @@ window.pin = (function () {
   var roomsFilter = filter.querySelector('#housing-rooms');
   var guestsFilter = filter.querySelector('#housing-guests');
   var featyresFilter = filter.querySelector('#housing-features');
-  var localAds;
-  var filterAds = [];
+  var localAds = [];
 
   var generateButton = function (ads) {
     var template = document.querySelector('template').content.querySelector('.map__pin');
@@ -39,19 +38,23 @@ window.pin = (function () {
   });
 
 
-  var onChangeFilterType = function (evt) {
-    var updateFilterFlat = localAds.filter(function (type) {
+
+  var updatePins = function () {
+   var filterAds = localAds;
+   deleteAllPins();
+
+  var onChangeFilterType = function () {
+    var updateFilterFlat = filterAds.filter(function (type) {
       return type.offer.type === 'flat';
     });
-    var updateFilterBungalo = localAds.filter(function (type) {
+    var updateFilterBungalo = filterAds.filter(function (type) {
       return type.offer.type === 'bungalo';
     });
     var updateFilterHouse = localAds.filter(function (type) {
       return type.offer.type === 'house';
     });
 
-    deleteAllPins();
-    switch (evt.target.value) {
+    switch (houseFilter.value) {
       case 'house':
         filterAds = updateFilterHouse;
 
@@ -70,108 +73,118 @@ window.pin = (function () {
       default:
         filterAds = localAds;
     }
-    generateButton(filterAds);
+    return filterAds;
+
   };
-  var onChangeFilterPrice = function (evt) {
-    var updateFilterCheap = localAds.filter(function (price) {
+
+  var onChangeFilterPrice = function () {
+    var updateFilterCheap = filterAds.filter(function (price) {
       return price.offer.price <= 10000;
     });
-    var updateFilterMiddle = localAds.filter(function (price) {
+    var updateFilterMiddle = filterAds.filter(function (price) {
       return price.offer.price > 10000 && price.offer.price < 50000;
     });
-    var updateFilterReach = localAds.filter(function (price) {
+    var updateFilterReach = filterAds.filter(function (price) {
       return price.offer.price >= 50000;
     });
-    deleteAllPins();
 
-    switch (evt.target.value) {
+
+    switch (priceFilter.value) {
       case 'low':
         filterAds = updateFilterCheap;
-        generateButton(localAds);
         break;
 
       case 'middle':
         filterAds = updateFilterMiddle;
-        generateButton(localAds);
         break;
 
       case 'hight':
         filterAds = updateFilterReach;
-        generateButton(localAds);
         break;
 
       default:
-        generateButton(localAds);
+        filterAds = localAds;
     }
+    return filterAds;
   };
 
-  var onChangeFilterRoom = function (evt) {
-    var updateFilterOneRoom = localAds.filter(function (rooms) {
+  var onChangeFilterRoom = function () {
+    var updateFilterOneRoom = filterAds.filter(function (rooms) {
       return rooms.offer.rooms === 1;
     });
-    var updateFilterTwoRoom = localAds.filter(function (rooms) {
+    var updateFilterTwoRoom = filterAds.filter(function (rooms) {
       return rooms.offer.rooms === 2;
     });
-    var updateFilterThreeRoom = localAds.filter(function (rooms) {
+    var updateFilterThreeRoom = filterAds.filter(function (rooms) {
       return rooms.offer.rooms === 3;
     });
-    deleteAllPins();
 
-    switch (evt.target.value) {
+    switch (roomsFilter.value) {
       case '1':
         filterAds = updateFilterOneRoom;
-        generateButton(localAds);
         break;
 
       case '2':
         filterAds = updateFilterTwoRoom;
-        generateButton(localAds);
         break;
       case '3':
         filterAds = updateFilterThreeRoom;
-        generateButton(localAds);
         break;
       default:
-        generateButton(localAds);
+                filterAds = localAds;
     }
+        return filterAds;
   };
 
-  var onChangeFilterGuest = function (evt) {
-    var updateFilterOneGuest = localAds.filter(function (guests) {
+  var onChangeFilterGuest = function () {
+    var updateFilterOneGuest = filterAds.filter(function (guests) {
       return guests.offer.guests === 1;
     });
-    var updateFilterTwoGuest = localAds.filter(function (guests) {
+    var updateFilterTwoGuest = filterAds.filter(function (guests) {
       return guests.offer.guests === 2;
     });
     deleteAllPins();
 
-    switch (evt.target.value) {
+    switch (guestsFilter.value) {
       case '1':
         filterAds = updateFilterOneGuest;
-        generateButton(localAds);
         break;
 
       case '2':
         filterAds = updateFilterTwoGuest;
-        generateButton(localAds);
         break;
       default:
-        generateButton(localAds);
+        filterAds = localAds;
     }
+     return filterAds;
   };
 
   var onChangeFilterFeatures = function () {
-    var wifiCheck = function () {
-      featyresFilter.querySelector('#filter-wifi').checked;
-      return true;
-    };
+ var featuresFilters = featyresFilter.querySelectorAll('#housing-features [type="checkbox"]:checked');
+      [].forEach.call(featuresFilters, function (item) {
+        filterAds = filterAds.filter(function (offerData) {
+          return offerData.offer.features.indexOf(item.value) >= 0;
+        });
+      });
+console.log(filterAds)
+return filterAds;
   };
 
-  houseFilter.addEventListener('change', onChangeFilterType);
-  priceFilter.addEventListener('change', onChangeFilterPrice);
-  roomsFilter.addEventListener('change', onChangeFilterRoom);
-  guestsFilter.addEventListener('change', onChangeFilterGuest);
-  featyresFilter.addEventListener('change', onChangeFilterFeatures);
+     houseFilter.addEventListener('change', onChangeFilterType());
+     priceFilter.addEventListener('change', onChangeFilterPrice());
+     roomsFilter.addEventListener('change', onChangeFilterRoom());
+     guestsFilter.addEventListener('change', onChangeFilterGuest());
+     featyresFilter.addEventListener('change', onChangeFilterFeatures());
+     // onChangeFilterFeatures()
+     // onChangeFilterType()
+     // onChangeFilterPrice()
+     // onChangeFilterGuest()
+     // onChangeFilterRoom()
+
+  generateButton(filterAds)
+ }
+
+ filter.addEventListener('change', updatePins)
 
   var onButtonMouseup = function () {
     formCard.classList.remove('notice__form--disabled');
