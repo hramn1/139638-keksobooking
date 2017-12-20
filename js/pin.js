@@ -51,7 +51,7 @@ window.pin = (function () {
           mapCard.classList.remove('hidden');
         }
       }
-      window.showCard.showMapCard(window.ads[currentTablindex]);
+      window.showCard.dataPopup(window.ads[currentTablindex]);
 
       var popupClose = document.querySelector('.popup__close');
       popupClose.addEventListener('click', window.utils.onButtonClick);
