@@ -37,7 +37,6 @@ window.pin = (function () {
     mapPins.addEventListener('click', showMapPins);
   };
 
-
   var showMapPins = function (event) {
     var targetElement = event.target.closest('button');
     if (targetElement && !targetElement.classList.contains('map__pin--main')) {
