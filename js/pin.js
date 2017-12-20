@@ -12,20 +12,23 @@ window.pin = (function () {
     var mapPin = document.querySelector('.map__pins');
     for (var j = 0; j < ads.length; j++) {
       window.ads = ads;
-      if(window.ads.length > 5){
-          window.ads.length = 5
-      }
       var templateButton = template.cloneNode(true);
       templateButton.style.left = (window.ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
       templateButton.style.top = (window.ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
       templateButton.className = 'map__pin';
       templateButton.setAttribute('tabindex', j);
       templateButton.innerHTML = '<img src=" ' + window.ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
-      var fragment = document.createDocumentFragment();
-      fragment.appendChild(templateButton);
-      mapPin.appendChild(fragment);
+          var fragment = document.createDocumentFragment();
+       fragment.appendChild(templateButton);
+       mapPin.appendChild(fragment);
+       console.log(fragment)
+    } 
+
     }
-  };
+       
+
+
+
 
 
   var onButtonMouseup = function () {
