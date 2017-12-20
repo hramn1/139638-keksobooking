@@ -13,10 +13,10 @@ window.showCard = (function () {
   var photoConteiner = popupTemplate.querySelector('.popup__pictures li');
 
   var dataPopup = function (ad) {
-          while (listFeatures.firstChild) {
+    while (listFeatures.firstChild) {
       listFeatures.removeChild(listFeatures.firstChild);
     }
-    for (var j = 0; j < ad.offer.features.length; j++) {
+    for (var i = 0; i < ad.offer.features.length; i++) {
       var newFeatures = document.createElement('li');
       newFeatures.className = 'feature feature--' + ad.offer.features[j];
       listFeatures.appendChild(newFeatures);
@@ -61,5 +61,5 @@ window.showCard = (function () {
   };
   return {
     dataPopup: dataPopup
-  }
+  };
 })();

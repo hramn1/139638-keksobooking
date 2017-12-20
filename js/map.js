@@ -60,8 +60,6 @@ window.map = (function () {
     mapActivate.addEventListener('mousedown', onMouseDown);
     window.pin.generateButton(ads);
   };
-    var BUTTON_WIDTH = 40;
-  var BUTTON_HEIGHT = 62;
 
   var filterType = document.querySelector('#housing-type');
   var filterPrice = document.querySelector('#housing-price');
@@ -102,7 +100,6 @@ window.map = (function () {
   });
 
   var filterAds = function (ad) {
-    console.log(ad)
     var adOffer = ad.offer;
     var adPrice = adOffer.price;
 
@@ -136,7 +133,6 @@ window.map = (function () {
   var updatePins = function () {
     deleteAllPins();
     var filteredAds = ads.filter(filterAds);
-    //generateAds(filteredAds);
     window.pin.generateButton(filteredAds);
   };
 
@@ -146,32 +142,11 @@ window.map = (function () {
       pins[i].remove();
     }
   });
-      var dataLoadAds = function (data) {
+  var dataLoadAds = function (data) {
     ads = data;
-
   };
 
   window.backend.load(dataLoadAds, window.utils.onErrorRequest);
-
-
-  // var generateAds = function (ads) {
-  //   var template = document.querySelector('template').content.querySelector('.map__pin');
-  //   var mapPin = document.querySelector('.map__pins');
-  //   if (ads.length > 5) {
-  //     ads.length = 5;
-  //   }
-  //   for (var j = 0; j < ads.length; j++) {
-  //     var templateButton = template.cloneNode(true);
-  //     templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
-  //     templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
-  //     templateButton.className = 'map__pin';
-  //     templateButton.setAttribute('tabindex', j);
-  //     templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
-  //     var fragment = document.createDocumentFragment();
-  //     fragment.appendChild(templateButton);
-  //     mapPin.appendChild(fragment);
-  //   }
-  // };
 
   return {
     showMap: showMap,
