@@ -95,7 +95,12 @@ window.map = (function () {
   });
 
   filterFeatures.addEventListener('change', function (evt) {
-    filterFeaturesValue = evt.target.value;
+    var filterFeaturesCheck = evt.target.checked;
+    if (filterFeaturesCheck === true) {
+      filterFeaturesValue = evt.target.value;
+    } else {
+      filterFeaturesValue = 'any';
+    }
     window.debounce(updatePins);
   });
 
