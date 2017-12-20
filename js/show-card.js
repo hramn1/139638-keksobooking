@@ -18,7 +18,7 @@ window.showCard = (function () {
     }
     for (var i = 0; i < ad.offer.features.length; i++) {
       var newFeatures = document.createElement('li');
-      newFeatures.className = 'feature feature--' + ad.offer.features[j];
+      newFeatures.className = 'feature feature--' + ad.offer.features[i];
       listFeatures.appendChild(newFeatures);
     }
 
