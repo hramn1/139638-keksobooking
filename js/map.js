@@ -66,7 +66,7 @@ window.map = (function () {
   var filterRooms = document.querySelector('#housing-rooms');
   var filterGuestsNumber = document.querySelector('#housing-guests');
   var filterFeatures = document.querySelector('#housing-features');
-
+  var filterFeaturesCheck;
 
   var filterTypeValue = 'any';
   var filterPriceValue = 'any';
@@ -95,7 +95,7 @@ window.map = (function () {
   });
 
   filterFeatures.addEventListener('change', function (evt) {
-    var filterFeaturesCheck = evt.target.checked;
+    filterFeaturesCheck = evt.target.checked;
     if (filterFeaturesCheck === true) {
       filterFeaturesValue = evt.target.value;
     } else {
