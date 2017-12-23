@@ -90,8 +90,8 @@ window.form = (function () {
     formCard.reset();
     var onSuccessEscPress = function (evt) {
       if (evt.keyCode === ESC_KEYCODE) {
-        var errorMessageEsc = document.querySelector('.success-message');
-        errorMessageEsc.remove();
+        var successMessageEsc = document.querySelector('.success-message');
+        successMessageEsc.remove();
         document.removeEventListener('keydown', onSuccessEscPress);
       }
     };
