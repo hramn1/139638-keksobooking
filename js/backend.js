@@ -8,7 +8,6 @@ window.backend = (function () {
     request: 400,
     user: 401,
     notFound: 404,
-    idiot: 418,
     server: 500,
   };
 
@@ -31,9 +30,6 @@ window.backend = (function () {
           break;
         case Status.notFound:
           error = 'Ничего не найдено';
-          break;
-        case Status.idiot:
-          error = 'Я идиот';
           break;
         case Status.server:
           error = 'Сервер опять ошибся';

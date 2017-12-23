@@ -1,6 +1,7 @@
 'use strict';
 
 window.form = (function () {
+  var ESC_KEYCODE = 27;
   var OFFER_TYPES = ['flat', 'house', 'bungalo', 'palace'];
   var OFFER_PRICES = ['1000', '5000', '0', '10000'];
   var OFFER_TIMES = ['12:00', '13:00', '14:00'];
@@ -87,6 +88,14 @@ window.form = (function () {
     node.classList.add('success-message');
     document.body.insertAdjacentElement('afterbegin', node);
     formCard.reset();
+    var onSuccessEscPress = function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        var errorMessageEsc = document.querySelector('.success-message');
+        errorMessageEsc.remove();
+        document.removeEventListener('keydown', onSuccessEscPress);
+      }
+    };
+    window.addEventListener('keydown', onSuccessEscPress);
   };
 
   var formSubmit = function (evt) {

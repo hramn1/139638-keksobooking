@@ -13,6 +13,14 @@ window.utils = (function () {
     message.classList.add('error-message');
     message.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', message);
+    var onErrorEscPress = function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        var errorMessageEsc = document.querySelector('.error-message');
+        errorMessageEsc.remove();
+        document.removeEventListener('keydown', onErrorEscPress);
+      }
+    };
+    window.addEventListener('keydown', onErrorEscPress);
   };
 
   var onButtonClick = function () {

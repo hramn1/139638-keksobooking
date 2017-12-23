@@ -5,20 +5,22 @@ window.pin = (function () {
   var BUTTON_HEIGHT = 62;
   var formCard = document.querySelector('.notice__form');
   var fieldsets = formCard.querySelectorAll('fieldset');
-  var localAds;
+  window.ads = [];
 
   var generateButton = function (ads) {
     var template = document.querySelector('template').content.querySelector('.map__pin');
     var mapPin = document.querySelector('.map__pins');
-
-    for (var j = 0; j < 4; j++) {
-      localAds = ads;
+    for (var j = 0; j < ads.length; j++) {
+      window.ads = ads;
+      if (window.ads.length > 5) {
+        window.ads.length = 5;
+      }
       var templateButton = template.cloneNode(true);
-      templateButton.style.left = (ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
-      templateButton.style.top = (ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
+      templateButton.style.left = (window.ads[j].location.x - BUTTON_WIDTH / 2) + 'px';
+      templateButton.style.top = (window.ads[j].location.y - BUTTON_HEIGHT / 2) + 'px';
       templateButton.className = 'map__pin';
       templateButton.setAttribute('tabindex', j);
-      templateButton.innerHTML = '<img src=" ' + ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
+      templateButton.innerHTML = '<img src=" ' + window.ads[j].author.avatar + ' " width="40" height="40" draggable="false">';
       var fragment = document.createDocumentFragment();
       fragment.appendChild(templateButton);
       mapPin.appendChild(fragment);
@@ -34,7 +36,6 @@ window.pin = (function () {
     var mapPins = document.querySelector('.map__pins');
     mapPins.addEventListener('click', showMapPins);
   };
-
 
   var showMapPins = function (event) {
     var targetElement = event.target.closest('button');
@@ -52,7 +53,7 @@ window.pin = (function () {
           mapCard.classList.remove('hidden');
         }
       }
-      window.showCard.showMapCard(localAds[currentTablindex]);
+      window.showCard.dataPopup(window.ads[currentTablindex]);
 
       var popupClose = document.querySelector('.popup__close');
       popupClose.addEventListener('click', window.utils.onButtonClick);
