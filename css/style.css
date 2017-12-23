@@ -850,28 +850,52 @@ textarea:focus
 .error-message
 {
     position: fixed;
-    z-index: 11;
-    background-color: red;
-    top:0;
-    bottom: 0;
-    width: 100px;
-    left: 0;
+    z-index: 12;
+    background-color: rgba(255, 70, 70, 1);
+    top:40%;
+    left: 40%;
+    right: 40%;
     text-align: center;
+    padding:40px 20px;
     font-size: 22px;
     color: white;
-    writing-mode: vertical-rl;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+.error-message::before
+{
+   content: "";
+   display: block;
+   position: fixed;
+   z-index: -1;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   background-color: rgba(0,0,0, 0.7);
 }
 .success-message
 {
     position: fixed;
     z-index: 12;
+    background-color: green;
+    top:40%;
+    left: 40%;
+    right: 40%;
     text-align: center;
-    height: 100px;
-    background-color: green; 
-    top: 0;
-    bottom: 0;
-    left: 0;
+    padding:40px 20px;
     font-size: 22px;
     color: white;
-    writing-mode: vertical-rl;
+    box-shadow: 0 0 3px 3px rgba(0, 0, 0, 0.6);
+}
+.success-message::before
+{
+   content: "";
+   display: block;
+   position: fixed;
+   z-index: -1;
+   top: 0;
+   bottom: 0;
+   right: 0;
+   left: 0;
+   background-color: rgba(0,0,0, 0.7);
 }
